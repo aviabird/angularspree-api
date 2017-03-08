@@ -1,4 +1,4 @@
-class OrdersController < BaseController
+class Api::OrdersController < BaseController
   before_filter :check_authorization, only: :index
 
   def index

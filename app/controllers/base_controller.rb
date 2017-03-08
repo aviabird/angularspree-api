@@ -25,7 +25,7 @@ protected
 
   def check_authorization
     @user = current_spree_user
-
+    binding.pry
     unauthorized unless @user
   end
 
