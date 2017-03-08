@@ -10,7 +10,7 @@ class Spree::UserSessionsController < Devise::SessionsController
   include Spree::Core::ControllerHelpers::Order
   # include Spree::Core::ControllerHelpers::SSL
   include Spree::Core::ControllerHelpers::Store
-  skip_before_action :verify_authenticity_token, if: -> {request.format.json?}
+  # skip_before_action :verify_authenticity_token, if: -> {request.format.json?}
 
   prepend_before_action :allow_params_authentication!, only: :create
 
