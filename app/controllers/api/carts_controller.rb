@@ -100,7 +100,7 @@ class CartsController < BaseController
 private
   def render_order
     render json: @order,
-           scope: current_spree_user,
+           scope: spree_current_user,
            serializer: OrderSerializer,
            root: false
   end

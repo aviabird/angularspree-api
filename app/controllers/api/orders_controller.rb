@@ -6,8 +6,9 @@ class Api::OrdersController < BaseController
 
     @orders = @user.orders.complete
 
+    binding.pry
     render json: @orders,
-           scope: current_spree_user,
+           scope: spree_current_user,
            each_serializer: LiteOrderSerializer,
            root: false
   end
@@ -24,7 +25,7 @@ class Api::OrdersController < BaseController
     end
 
     render json: @order,
-           scope: current_spree_user,
+           scope: spree_current_user,
            serializer: OrderSerializer,
            root: false
   end

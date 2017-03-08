@@ -9,8 +9,8 @@ class BaseController < Spree::BaseController
 
   helper Spree::Api::ApiHelpers
 
+  before_action :set_current_user
   before_action :load_user_roles
-
   # before_action :set_language
 
 protected
@@ -27,8 +27,7 @@ protected
   end
 
   def check_authorization
-    @user = current_spree_user
-    binding.pry
+    @user = @spree_current_user
     unauthorized unless @user
   end
 
@@ -38,10 +37,16 @@ protected
   helper_method :current_currency
 
   def load_user_roles
-    @current_user_roles = if @current_spree_user
-      @current_spree_user.spree_roles.pluck(:name)
+    @current_user_roles = if @spree_current_user
+      @spree_current_user.spree_roles.pluck(:name)
     else
       []
     end
   end
+
+  def set_current_user
+    token = request.headers["X-Spree-Token"]
+    @spree_current_user = Spree::User.find_by_spree_api_key(token)
+  end
+
 end
