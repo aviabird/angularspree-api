@@ -1,6 +1,5 @@
 class BaseController < Spree::BaseController
   include Spree::Core::ControllerHelpers::Order
-  skip_before_action :verify_authenticity_token, if: :json_request?
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
