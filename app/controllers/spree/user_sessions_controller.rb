@@ -21,7 +21,6 @@ class Spree::UserSessionsController < Devise::SessionsController
     user = Spree::User.find_by_email(params[:email])
     # Warden authentication
     self.resource = warden.authenticate!(auth_options)
-
     if spree_user_signed_in?
       respond_to do |format|
         format.json {
