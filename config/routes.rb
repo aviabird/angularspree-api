@@ -22,9 +22,9 @@ Rails.application.routes.draw do
     end
     resource :account
     resources :passwords
-    # resources :credit_cards, only: :destroy
-    # resources :addresses, only: :destroy
-    # resources :countries, only: :index
-    # resources :orders, only: %i(index show)
+    resources :credit_cards, only: :destroy
+    resources :addresses, only: :destroy
+    resources :countries, only: :index
+    resources :orders, only: %i(index show)
   end
 end
