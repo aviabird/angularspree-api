@@ -1,6 +1,7 @@
 class BaseController < Spree::BaseController
   include Spree::Core::ControllerHelpers::Order
-
+  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+  
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   respond_to :json
