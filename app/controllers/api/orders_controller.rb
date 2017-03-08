@@ -2,11 +2,8 @@ class Api::OrdersController < BaseController
   before_filter :check_authorization, only: :index
 
   def index
-    authorize! :show, @user
-
     @orders = @user.orders.complete
 
-    binding.pry
     render json: @orders,
            scope: spree_current_user,
            each_serializer: LiteOrderSerializer,

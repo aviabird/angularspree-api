@@ -50,4 +50,8 @@ protected
     @spree_current_user = Spree::User.find_by_spree_api_key(token)
   end
 
+  def spree_current_user
+    @spree_current_user
+  end
+
 end
