@@ -1,4 +1,4 @@
-class AccountsController < BaseController
+class Api::AccountsController < BaseController
   before_filter :check_authorization, except: :create
 
   def serialization_scope

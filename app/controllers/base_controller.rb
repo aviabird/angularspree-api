@@ -1,5 +1,6 @@
 class BaseController < Spree::BaseController
   include Spree::Core::ControllerHelpers::Order
+  skip_before_action :verify_authenticity_token, if: :json_request?
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
@@ -22,6 +23,9 @@ protected
                   end
   end
 
+  def unauthorized
+    render json: {status: 'unauthorized'},status: 401
+  end
 
   def check_authorization
     @user = current_spree_user
