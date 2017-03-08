@@ -20,8 +20,8 @@ Rails.application.routes.draw do
       put :remove_adjustment
       delete :remove_variant
     end
-    # resource :account
-    # resources :passwords
+    resource :account
+    resources :passwords
     # resources :credit_cards, only: :destroy
     # resources :addresses, only: :destroy
     # resources :countries, only: :index
