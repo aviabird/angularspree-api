@@ -25,9 +25,13 @@ class Spree::UserSessionsController < Devise::SessionsController
     self.resource = warden.authenticate!(auth_options)
     if spree_user_signed_in?
       respond_to do |format|
+        format.html {
+          flash[:success] = Spree.t(:logged_in_succesfully)
+          redirect_back_or_default(after_sign_in_path_for(spree_current_user))
+        }        
         format.json {
           @user = spree_current_user
-          @order = current_order
+          @order = current_order({create_order_if_necessary: true})
           @current_user_roles = @user.spree_roles
           
           render json: @user,
@@ -38,6 +42,10 @@ class Spree::UserSessionsController < Devise::SessionsController
       end
     else
       respond_to do |format|
+        format.html {
+          flash.now[:error] = t('devise.failure.invalid')
+          render :new
+        }        
         format.json {
           render json: { error: t('devise.failure.invalid') }, status: :unprocessable_entity, layout: false
         }
