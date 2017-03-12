@@ -12,6 +12,7 @@ class Spree::UserSessionsController < Devise::SessionsController
   include Spree::Core::ControllerHelpers::Store
 
   skip_before_action :verify_authenticity_token, if: -> {request.format.json?}
+  skip_before_action :protect_from_forgery
   protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
 
   prepend_before_action :allow_params_authentication!, only: :create
@@ -20,7 +21,6 @@ class Spree::UserSessionsController < Devise::SessionsController
   # ssl_allowed :login_bar
 
   def create
-    user = Spree::User.find_by_email(params[:email])
     # Warden authentication
     self.resource = warden.authenticate!(auth_options)
     if spree_user_signed_in?
