@@ -11,9 +11,7 @@ class Spree::UserSessionsController < Devise::SessionsController
   # include Spree::Core::ControllerHelpers::SSL
   include Spree::Core::ControllerHelpers::Store
 
-  skip_before_action :verify_authenticity_token, if: -> {request.format.json?}
-  skip_before_action :protect_from_forgery
-  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
+  protect_from_forgery with: :null_session, if: -> { request.format.json? }
 
   prepend_before_action :allow_params_authentication!, only: :create
 
