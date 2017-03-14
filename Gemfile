@@ -57,4 +57,5 @@ group :production do
   gem 'pg'
 end
 
+# Rack Cores
 gem 'rack-cors', :require => 'rack/cors'
