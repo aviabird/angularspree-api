@@ -9,7 +9,11 @@ class Api::ProductsController < BaseController
     @cache_key = [I18n.locale,
                   @current_user_roles.include?('admin'),
                   current_currency,
-                  params.slice(:keywords, :search, :taxon, :taxons, :option_types, :browse_mode, :price_min, :price_max, :properties, :sorting, :per_page, :page).to_s]
+                  params.slice(:keywords, :search, :taxon, 
+                               :taxons, :option_types,
+                               :browse_mode, :price_min, 
+                               :price_max, :properties,
+                               :sorting, :per_page, :page).to_s]
 
     render json: @products,
            each_serializer: ProductSerializer,
@@ -33,6 +37,7 @@ class Api::ProductsController < BaseController
 
   ####################### PRIVATE METHODS #############################
   private
+
   def product_scope
     Spree::Product.active.includes(:option_types, :taxons, master: %i(images option_values prices), product_properties: [:property], variants: %i(images option_values prices))
   end
