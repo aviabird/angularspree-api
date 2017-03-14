@@ -1,4 +1,4 @@
-class OrderSerializer < ActiveModel::Serializer
+class OrderSerializer < BaseSerializer
   extend Spree::Api::ApiHelpers
   attributes *order_attributes
   attributes | [:display_total, :display_item_total, :display_ship_total, :display_tax_total, :checkout_steps]
