@@ -12,7 +12,8 @@ class Api::AccountsController < BaseController
     if @user.persisted?
       sign_in(:spree_user, @user)
       @order.update(user: @user) if @order && !@order.user
-
+      @user.generate_spree_api_key!
+      
       render_user
     else
       invalid_resource!(@user)

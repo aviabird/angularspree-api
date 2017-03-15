@@ -54,4 +54,8 @@ protected
     @spree_current_user
   end
 
+  def invalid_resource!(resource)
+    render json: { errors: resource.errors.messages }, status: 422
+  end
+
 end
