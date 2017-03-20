@@ -1,7 +1,7 @@
 class ProductSerializer < BaseSerializer
   attributes :id, :name, :description, :price, :display_price,
              :available_on, :slug, :meta_title, :meta_description, :meta_keywords,
-             :shipping_category_id, :taxon_ids, :has_variants
+             :shipping_category_id, :taxon_ids, :has_variants, :master
 
   has_one :master, serializer: SmallVariantSerializer
 
