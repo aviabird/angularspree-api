@@ -17,4 +17,4 @@
 /tmp
 
 # Ignore spree folder in public
-/public/spree/products
+#/public/spree/products
