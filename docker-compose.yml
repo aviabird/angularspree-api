@@ -13,6 +13,8 @@ services:
       - "3000:3000"
     volumes_from:
       - bundle
+    volumes:
+      - .:/home/app/angularspree-server
 
   bundle:
     image: angularspree-server
