@@ -1,0 +1,26 @@
+version: '2'
+services:
+  angularspree-server:
+    build:
+      context: .
+      dockerfile: ./.docker/development.dockerfile
+    command: bin/rails server -p 3000 -b 0.0.0.0
+    container_name: angularspree-server-start
+    image: angularspree-server
+    networks:
+      - dev-network
+    ports:
+      - "3000:3000"
+    volumes_from:
+      - bundle
+    volumes:
+      - .:/home/app/angularspree-server
+
+  bundle:
+    image: angularspree-server
+    volumes:
+      - /bundle
+
+networks:
+  dev-network:
+    driver: bridge
