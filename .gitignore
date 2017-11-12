@@ -18,3 +18,7 @@
 
 # Ignore spree folder in public
 /public/spree/products
+.env
+.env.development
+.env.production
+.idea/

@@ -102,8 +102,10 @@ GEM
       warden (~> 1.2.3)
     devise-encryptable (0.1.2)
       devise (>= 2.1.0)
-    domain_name (0.5.20170404)
-      unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.2.1)
+    dotenv-rails (2.2.1)
+      dotenv (= 2.2.1)
+      railties (>= 3.2, < 5.2)
     erubis (2.7.0)
     execjs (2.7.0)
     ffaker (2.2.0)
@@ -115,8 +117,6 @@ GEM
       activesupport (>= 4.1.0)
     highline (1.6.21)
     htmlentities (4.3.4)
-    http-cookie (1.0.3)
-      domain_name (~> 0.5)
     httpclient (2.8.3)
     i18n (0.7.0)
     jbuilder (2.6.3)
@@ -154,7 +154,6 @@ GEM
       i18n (>= 0.6.4, <= 0.7.0)
       sixarm_ruby_unaccent (>= 1.1.1, < 2)
     multi_json (1.12.1)
-    netrc (0.11.0)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     orm_adapter (0.5.0)
@@ -226,10 +225,6 @@ GEM
     rdoc (4.3.0)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
-    rest-client (2.0.2)
-      http-cookie (>= 1.0.2, < 2.0)
-      mime-types (>= 1.16, < 4.0)
-      netrc (~> 0.8)
     rmagick (2.16.0)
     sass (3.4.23)
     sass-rails (5.0.6)
@@ -336,9 +331,6 @@ GEM
       thread_safe (~> 0.1)
     uglifier (3.1.4)
       execjs (>= 0.3.0, < 3)
-    unf (0.1.4)
-      unf_ext
-    unf_ext (0.0.7.4)
     versioncake (2.3.1)
       actionpack (>= 3.2)
       activesupport (>= 3.2)
@@ -359,6 +351,7 @@ DEPENDENCIES
   active_model_serializers
   byebug
   coffee-rails (~> 4.1.0)
+  dotenv-rails
   httpclient
   i18n (~> 0.7.0)
   jbuilder (~> 2.0)
@@ -368,7 +361,6 @@ DEPENDENCIES
   rack-cors
   rails (= 4.2.6)
   rails_12factor
-  rest-client
   rmagick
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
