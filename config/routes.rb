@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   mount Spree::Core::Engine, at: '/spree'
   
   # Main application routes
+  post 'auth/:provider', to: 'oauth#create'
+
   scope '/api', module: 'api', defaults: {format: :json} do
     resources :taxonomies, only: :index
     get 'taxons/*permalink', to: 'taxons#show'
