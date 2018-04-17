@@ -36,13 +36,13 @@ gem 'spree', '~> 3.4.4'
 gem 'spree_auth_devise', '~> 3.3'
 gem 'spree_gateway', '~> 3.3'
 gem 'active_model_serializers'
+gem 'httpclient'
+gem 'dotenv-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry'
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
 end
 
 group :development do
@@ -54,10 +54,14 @@ group :development do
 end
 
 group :production do
-  gem 'pg'
   gem 'rails_12factor'
 end
 
+# DB
+gem 'pg', '~> 0.18'
+
 # Rack Cores
 gem 'rack-cors', :require => 'rack/cors'
+
+# reference https://gist.github.com/JagdeepSingh/4b03cbeab16cc0bc729bbc6d275402d3
 gem 'rmagick'

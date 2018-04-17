@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   # We ask that you don't use the :as option here, as Spree relies on it being
   # the default of "spree".
   mount Spree::Core::Engine, at: '/spree'
+  
+  # Main application routes 
+  post 'auth/:provider', to: 'oauth#create'
 
-  # Main application routes
   scope '/api', module: 'api', defaults: {format: :json} do
     resources :taxonomies, only: :index
     get 'taxons/*permalink', to: 'taxons#show'
