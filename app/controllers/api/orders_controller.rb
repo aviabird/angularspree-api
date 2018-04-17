@@ -1,5 +1,5 @@
 class Api::OrdersController < BaseController
-  before_filter :check_authorization, only: :index
+  before_action :check_authorization, only: :index
 
   def index
     @orders = @user.orders.complete
