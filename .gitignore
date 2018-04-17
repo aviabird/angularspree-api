@@ -18,3 +18,5 @@
 
 # Ignore spree folder in public
 /public/spree/products
+/config/deploy.rb
+
