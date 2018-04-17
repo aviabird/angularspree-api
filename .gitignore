@@ -20,3 +20,5 @@
 /public/spree/products
 /config/deploy.rb
 
+.env.*
+!.env.example
