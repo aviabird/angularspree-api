@@ -1,5 +1,5 @@
 class AddressesController < BaseController
-  before_filter :check_authorization
+  before_action :check_authorization
 
   def destroy
     authorize! :update, @user
