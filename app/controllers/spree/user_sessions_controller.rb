@@ -1,10 +1,7 @@
 class Spree::UserSessionsController < Devise::SessionsController
-  helper 'spree/base', 'spree/store', Spree::Api::ApiHelpers
+  helper Spree::BaseHelper
 
-  if Spree::Auth::Engine.dash_available?
-    helper 'spree/analytics'
-  end
-
+  include Spree::Core::ControllerHelpers
   include Spree::Core::ControllerHelpers::Auth
   include Spree::Core::ControllerHelpers::Common
   include Spree::Core::ControllerHelpers::Order

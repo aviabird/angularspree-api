@@ -1,5 +1,5 @@
 class Api::ProductsController < BaseController
-  before_filter :find_taxon_id, only: :index
+  before_action :find_taxon_id, only: :index
 
   def index
     searcher = Spree::Config.searcher_class.new(params)

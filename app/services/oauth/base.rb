@@ -22,8 +22,8 @@ module Oauth
       @params = {
           code:          URI.unescape(params[:oauthData][:code]),
           redirect_uri:  params[:authorizationData][:redirect_uri],
-          client_id:     "682466898339-lh2psagi1s3pgo9h5unri91ogptom1os.apps.googleusercontent.com",
-          client_secret: "H6bhM0Klg5vlfjn9FX7N8QZD",
+          client_id:     ENV['GOOGLE_CLIENT_ID'],
+          client_secret: ENV['GOOGLE_CLIENT_SECRET'],
           grant_type:    'authorization_code'
       }
     end
