@@ -4,7 +4,7 @@ class OauthController < BaseController
     auth = Oauth.for(params[:provider]).new(params).call
 
     if auth.authorized?
-      user = OauthUserCreator.new(auth.user_info, spree_current_user).call
+      user = OauthUserCreator.new(auth.user_info, set_current_user).call
       if user
         render json: user,
                root: false,
