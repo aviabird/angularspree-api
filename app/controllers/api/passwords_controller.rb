@@ -1,10 +1,10 @@
-class PasswordsController < BaseController
+class Api::PasswordsController < BaseController
 
   def create
     user = Spree::User.find_by!(email: params[:spree_user][:email])
 
-    Spree::User.send_reset_password_instructions(user)
-
+    token = user.send_reset_password_instructions
+    UserMailer.reset_password_instructions(user, token).deliver
     respond_with user
   end
 
@@ -18,7 +18,6 @@ class PasswordsController < BaseController
         sign_in :spree_user, user
       end
     end
-
     respond_with user
   end
 end
