@@ -22,7 +22,7 @@ module Oauth
       @params = {
           code:          URI.unescape(params[:oauthData][:code]),
           redirect_uri:  params[:authorizationData][:redirect_uri],
-          client_id:     ENV['GOOGLE_CLIENT_ID'],
+          client_id:     ENV['GOOGLE_CLIENT_ID'] ,
           client_secret: ENV['GOOGLE_CLIENT_SECRET'],
           grant_type:    'authorization_code'
       }
