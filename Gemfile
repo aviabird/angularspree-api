@@ -39,6 +39,9 @@ gem 'active_model_serializers'
 gem 'httpclient'
 gem 'dotenv-rails'
 
+# Spree Extensions
+gem 'spree_favorite_products', github: 'vinsol-spree-contrib/spree_favorite_products'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
