@@ -20,4 +20,6 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  favorite_products:
+    destroy: 
+      success: "Product has been successfully removed from favorite"

@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180416075149) do
+ActiveRecord::Schema.define(version: 20180423194848) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
@@ -33,18 +36,7 @@ ActiveRecord::Schema.define(version: 20180416075149) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true
-    t.index ["user_id"], name: "index_identities_on_user_id"
   end
-
-  create_table "identities", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.string   "provider",   null: false
-    t.string   "uid",        null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "identities", ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true
 
   create_table "spree_addresses", force: :cascade do |t|
     t.string "firstname"
@@ -158,6 +150,15 @@ ActiveRecord::Schema.define(version: 20180416075149) do
     t.datetime "updated_at", null: false
     t.index ["number"], name: "index_spree_customer_returns_on_number", unique: true
     t.index ["stock_location_id"], name: "index_spree_customer_returns_on_stock_location_id"
+  end
+
+  create_table "spree_favorites", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "product_id"], name: "index_spree_favorites_on_user_id_and_product_id", unique: true
+    t.index ["user_id"], name: "index_spree_favorites_on_user_id"
   end
 
   create_table "spree_gateways", force: :cascade do |t|
@@ -427,9 +428,11 @@ ActiveRecord::Schema.define(version: 20180416075149) do
     t.boolean "promotionable", default: true
     t.string "meta_title"
     t.datetime "discontinue_on"
+    t.integer "favorite_users_count", default: 0
     t.index ["available_on"], name: "index_spree_products_on_available_on"
     t.index ["deleted_at"], name: "index_spree_products_on_deleted_at"
     t.index ["discontinue_on"], name: "index_spree_products_on_discontinue_on"
+    t.index ["favorite_users_count"], name: "index_spree_products_on_favorite_users_count"
     t.index ["name"], name: "index_spree_products_on_name"
     t.index ["shipping_category_id"], name: "index_spree_products_on_shipping_category_id"
     t.index ["slug"], name: "index_spree_products_on_slug", unique: true
