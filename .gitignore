@@ -17,8 +17,7 @@
 /tmp
 
 # Ignore spree folder in public
-/public/spree/products/*
-/public/assets
+/public/spree/*
 /config/deploy.rb
 
 .env.*
