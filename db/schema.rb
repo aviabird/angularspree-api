@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180423194848) do
+ActiveRecord::Schema.define(version: 20180426184736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(version: 20180423194848) do
     t.text "alt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "digital_asset_id"
+    t.index ["digital_asset_id"], name: "index_spree_assets_on_digital_asset_id"
     t.index ["position"], name: "index_spree_assets_on_position"
     t.index ["viewable_id"], name: "index_assets_on_viewable_id"
     t.index ["viewable_type", "type"], name: "index_assets_on_viewable_type_and_type"
@@ -152,6 +154,18 @@ ActiveRecord::Schema.define(version: 20180423194848) do
     t.index ["stock_location_id"], name: "index_spree_customer_returns_on_stock_location_id"
   end
 
+  create_table "spree_digital_assets", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "attachment_file_name"
+    t.string "attachment_content_type"
+    t.integer "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.integer "folder_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "approved", default: true, null: false
+  end
+
   create_table "spree_favorites", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "product_id"
@@ -159,6 +173,18 @@ ActiveRecord::Schema.define(version: 20180423194848) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "product_id"], name: "index_spree_favorites_on_user_id_and_product_id", unique: true
     t.index ["user_id"], name: "index_spree_favorites_on_user_id"
+  end
+
+  create_table "spree_folders", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.integer "parent_id"
+    t.integer "lft", null: false
+    t.integer "rgt", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lft"], name: "index_spree_folders_on_lft"
+    t.index ["parent_id"], name: "index_spree_folders_on_parent_id"
+    t.index ["rgt"], name: "index_spree_folders_on_rgt"
   end
 
   create_table "spree_gateways", force: :cascade do |t|
@@ -363,6 +389,31 @@ ActiveRecord::Schema.define(version: 20180423194848) do
     t.index ["order_id"], name: "index_spree_payments_on_order_id"
     t.index ["payment_method_id"], name: "index_spree_payments_on_payment_method_id"
     t.index ["source_id", "source_type"], name: "index_spree_payments_on_source_id_and_source_type"
+  end
+
+  create_table "spree_permission_sets", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string "description", default: ""
+    t.boolean "display_permission", default: false
+  end
+
+  create_table "spree_permissions", id: :serial, force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "priority", default: 0
+    t.boolean "visible", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description", default: ""
+    t.index ["visible"], name: "index_spree_permissions_on_visible"
+  end
+
+  create_table "spree_permissions_permission_sets", id: :serial, force: :cascade do |t|
+    t.integer "permission_id"
+    t.integer "permission_set_id"
+    t.index ["permission_id"], name: "index_spree_permissions_permission_sets_on_permission_id"
+    t.index ["permission_set_id"], name: "index_spree_permissions_permission_sets_on_permission_set_id"
   end
 
   create_table "spree_preferences", force: :cascade do |t|
@@ -667,7 +718,26 @@ ActiveRecord::Schema.define(version: 20180423194848) do
 
   create_table "spree_roles", force: :cascade do |t|
     t.string "name"
+    t.boolean "editable", default: true
+    t.boolean "is_default", default: false
+    t.boolean "admin_accessible", default: false
+    t.index ["editable"], name: "index_spree_roles_on_editable"
+    t.index ["is_default"], name: "index_spree_roles_on_is_default"
     t.index ["name"], name: "index_spree_roles_on_name", unique: true
+  end
+
+  create_table "spree_roles_permission_sets", id: :serial, force: :cascade do |t|
+    t.integer "role_id"
+    t.integer "permission_set_id"
+    t.index ["permission_set_id"], name: "index_spree_roles_permission_sets_on_permission_set_id"
+    t.index ["role_id"], name: "index_spree_roles_permission_sets_on_role_id"
+  end
+
+  create_table "spree_roles_permissions", id: false, force: :cascade do |t|
+    t.integer "role_id", null: false
+    t.integer "permission_id", null: false
+    t.index ["permission_id"], name: "index_spree_roles_permissions_on_permission_id"
+    t.index ["role_id"], name: "index_spree_roles_permissions_on_role_id"
   end
 
   create_table "spree_shipments", force: :cascade do |t|
@@ -1082,4 +1152,8 @@ ActiveRecord::Schema.define(version: 20180423194848) do
     t.index ["kind"], name: "index_spree_zones_on_kind"
   end
 
+  add_foreign_key "spree_permissions_permission_sets", "spree_permission_sets", column: "permission_set_id"
+  add_foreign_key "spree_permissions_permission_sets", "spree_permissions", column: "permission_id"
+  add_foreign_key "spree_roles_permission_sets", "spree_permission_sets", column: "permission_set_id"
+  add_foreign_key "spree_roles_permission_sets", "spree_roles", column: "role_id"
 end
