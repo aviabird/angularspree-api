@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180423194848) do
+ActiveRecord::Schema.define(version: 20180426184736) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20180423194848) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true
+    t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
   create_table "spree_addresses", force: :cascade do |t|
@@ -365,6 +366,31 @@ ActiveRecord::Schema.define(version: 20180423194848) do
     t.index ["source_id", "source_type"], name: "index_spree_payments_on_source_id_and_source_type"
   end
 
+  create_table "spree_permission_sets", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string "description", default: ""
+    t.boolean "display_permission", default: false
+  end
+
+  create_table "spree_permissions", id: :serial, force: :cascade do |t|
+    t.string "title", null: false
+    t.integer "priority", default: 0
+    t.boolean "visible", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "description", default: ""
+    t.index ["visible"], name: "index_spree_permissions_on_visible"
+  end
+
+  create_table "spree_permissions_permission_sets", id: :serial, force: :cascade do |t|
+    t.integer "permission_id"
+    t.integer "permission_set_id"
+    t.index ["permission_id"], name: "index_spree_permissions_permission_sets_on_permission_id"
+    t.index ["permission_set_id"], name: "index_spree_permissions_permission_sets_on_permission_set_id"
+  end
+
   create_table "spree_preferences", force: :cascade do |t|
     t.text "value"
     t.string "key"
@@ -667,7 +693,26 @@ ActiveRecord::Schema.define(version: 20180423194848) do
 
   create_table "spree_roles", force: :cascade do |t|
     t.string "name"
+    t.boolean "editable", default: true
+    t.boolean "is_default", default: false
+    t.boolean "admin_accessible", default: false
+    t.index ["editable"], name: "index_spree_roles_on_editable"
+    t.index ["is_default"], name: "index_spree_roles_on_is_default"
     t.index ["name"], name: "index_spree_roles_on_name", unique: true
+  end
+
+  create_table "spree_roles_permission_sets", id: :serial, force: :cascade do |t|
+    t.integer "role_id"
+    t.integer "permission_set_id"
+    t.index ["permission_set_id"], name: "index_spree_roles_permission_sets_on_permission_set_id"
+    t.index ["role_id"], name: "index_spree_roles_permission_sets_on_role_id"
+  end
+
+  create_table "spree_roles_permissions", id: false, force: :cascade do |t|
+    t.integer "role_id", null: false
+    t.integer "permission_id", null: false
+    t.index ["permission_id"], name: "index_spree_roles_permissions_on_permission_id"
+    t.index ["role_id"], name: "index_spree_roles_permissions_on_role_id"
   end
 
   create_table "spree_shipments", force: :cascade do |t|
@@ -1082,4 +1127,8 @@ ActiveRecord::Schema.define(version: 20180423194848) do
     t.index ["kind"], name: "index_spree_zones_on_kind"
   end
 
+  add_foreign_key "spree_permissions_permission_sets", "spree_permission_sets", column: "permission_set_id"
+  add_foreign_key "spree_permissions_permission_sets", "spree_permissions", column: "permission_id"
+  add_foreign_key "spree_roles_permission_sets", "spree_permission_sets", column: "permission_set_id"
+  add_foreign_key "spree_roles_permission_sets", "spree_roles", column: "role_id"
 end
