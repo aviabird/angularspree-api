@@ -1,8 +1,10 @@
 class Spree::FavoriteProductsController < BaseController
 
+  before_action :check_authorization, except: [:index]
+
   def index
-    favorite_products = spree_current_user.favorite_products.page(params[:page]).per(Spree::Config.favorite_products_per_page)
-    render json: favorite_products
+    favorite_products = Spree::Product.favorite.includes(master: :images).order('favorite_users_count asc')
+    respond_with(favorite_products)
   end
 
   def create
@@ -22,6 +24,11 @@ class Spree::FavoriteProductsController < BaseController
     favorite.destroy
 
     render json: { message: t('favorite_products.destroy.success') }
+  end
+
+  def user_favorite_products
+    favorite_products = spree_current_user.favorite_products.page(params[:page]).per(Spree::Config.favorite_products_per_page)
+    respond_with(favorite_products)
   end
 
 end
