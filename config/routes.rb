@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   mount Spree::Core::Engine, at: '/'
   
   # Main application routes 
-  post 'auth/:provider', to: 'oauth#create'
 
   scope '/api', module: 'api', defaults: {format: :json} do
     resources :taxonomies, only: :index
@@ -24,13 +23,18 @@ Rails.application.routes.draw do
       put :remove_adjustment
       delete :remove_variant
     end
-    resource :account
-    resources :passwords
     resources :credit_cards, only: :destroy
     resources :addresses, only: :destroy
     resources :countries, only: :index
     resources :orders, only: %i(index show)
   end
+
+  scope module: 'api', path: 'auth' do
+    resources :accounts
+    resources :passwords
+  end
+
+  post 'auth/:provider', to: 'oauth#create'
 
   namespace :spree do
     get 'user_favorite_products', to: 'favorite_products#user_favorite_products', as: 'user_favorite_products'
