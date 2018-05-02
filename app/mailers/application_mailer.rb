@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-    default from: 'angularspree@aviabird.com'
+    default from: ENV['MAIL_FROM']
     layout 'mailer'
   end
   

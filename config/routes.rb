@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     resources :orders, only: %i(index show)
   end
 
-  scope module: 'api', path: 'auth' do
+  scope module: 'api', path: 'auth', defaults: {format: :json} do
     resources :accounts
     resources :passwords
   end
