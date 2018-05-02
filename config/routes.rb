@@ -31,4 +31,9 @@ Rails.application.routes.draw do
     resources :countries, only: :index
     resources :orders, only: %i(index show)
   end
+
+  namespace :spree do
+    get 'user_favorite_products', to: 'favorite_products#user_favorite_products', as: 'user_favorite_products'
+  end
+
 end
