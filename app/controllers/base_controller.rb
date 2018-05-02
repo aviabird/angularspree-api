@@ -24,7 +24,7 @@ protected
   end
 
   def unauthorized
-    render json: {status: 'unauthorized'},status: 401
+    render json: {status: 'unauthorized'}, status: 401
   end
 
   def check_authorization
