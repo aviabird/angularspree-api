@@ -1,9 +1,9 @@
 class UserMailer < ActionMailer::Base
-  default from: 'angularspree@aviabird.com'
+  default from: ENV['MAIL_FROM']
   
   def reset_password_instructions(user, token)
     @user = user
     @token =token
-    mail(to: @user.email, subject: 'Angular Spree Reset password instructions')
+    mail(to: @user.email, subject: ENV['RESET_PASSWORD_SUBJECT'])
   end
 end
