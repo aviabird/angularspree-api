@@ -32,10 +32,10 @@ class OauthUserCreator
         @user = find_or_create_user_from_oauth
         
         if @user.persisted?
-          # sign_in(:spree_user, @user)
           @order.update(user: @user) if @order && !@order.user
-          @user.generate_spree_api_key!
-
+          if !@user.spree_api_key?
+            @user.generate_spree_api_key!
+          end
           identity.user = @user
           identity.save!
           return @user
@@ -48,12 +48,17 @@ class OauthUserCreator
 
   private
   def find_or_create_user_from_oauth
-    user = Spree::User.create(email: info.email)
-    if user.new_record?
-      user.password = SecureRandom.hex
-      # user.email_confirmed = info.email_verified?
-      user.save
+    user = Spree::User.find_by(email: info.email)
+    #check if user is present in db.
+    if !user.present?
+      user = Spree::User.create(email: info.email)
+      if user.new_record?
+        user.password = SecureRandom.hex
+        user.save
+        return user
+      end  
+    else 
+      user
     end
-    user
   end
 end
