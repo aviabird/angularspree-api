@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180426184736) do
+ActiveRecord::Schema.define(version: 20180518103103) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ckeditor_assets", force: :cascade do |t|
+    t.string "data_file_name", null: false
+    t.string "data_content_type"
+    t.integer "data_file_size"
+    t.string "data_fingerprint"
+    t.string "type", limit: 30
+    t.integer "width"
+    t.integer "height"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["type"], name: "index_ckeditor_assets_on_type"
+  end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
@@ -36,7 +49,6 @@ ActiveRecord::Schema.define(version: 20180426184736) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["uid", "provider"], name: "index_identities_on_uid_and_provider", unique: true
-    t.index ["user_id"], name: "index_identities_on_user_id"
   end
 
   create_table "spree_addresses", force: :cascade do |t|
@@ -94,6 +106,8 @@ ActiveRecord::Schema.define(version: 20180426184736) do
     t.text "alt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "digital_asset_id"
+    t.index ["digital_asset_id"], name: "index_spree_assets_on_digital_asset_id"
     t.index ["position"], name: "index_spree_assets_on_position"
     t.index ["viewable_id"], name: "index_assets_on_viewable_id"
     t.index ["viewable_type", "type"], name: "index_assets_on_viewable_type_and_type"
@@ -153,6 +167,18 @@ ActiveRecord::Schema.define(version: 20180426184736) do
     t.index ["stock_location_id"], name: "index_spree_customer_returns_on_stock_location_id"
   end
 
+  create_table "spree_digital_assets", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.string "attachment_file_name"
+    t.string "attachment_content_type"
+    t.integer "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.integer "folder_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "approved", default: true, null: false
+  end
+
   create_table "spree_favorites", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "product_id"
@@ -160,6 +186,18 @@ ActiveRecord::Schema.define(version: 20180426184736) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "product_id"], name: "index_spree_favorites_on_user_id_and_product_id", unique: true
     t.index ["user_id"], name: "index_spree_favorites_on_user_id"
+  end
+
+  create_table "spree_folders", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.integer "parent_id"
+    t.integer "lft", null: false
+    t.integer "rgt", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lft"], name: "index_spree_folders_on_lft"
+    t.index ["parent_id"], name: "index_spree_folders_on_parent_id"
+    t.index ["rgt"], name: "index_spree_folders_on_rgt"
   end
 
   create_table "spree_gateways", force: :cascade do |t|
