@@ -39,12 +39,14 @@ gem 'active_model_serializers'
 gem 'httpclient'
 gem 'dotenv-rails'
 
+
 # Spree Extensions
 gem 'spree_favorite_products', github: 'vinsol-spree-contrib/spree_favorite_products'
 gem 'spree_admin_roles_and_access', github: 'vinsol-spree-contrib/spree_admin_roles_and_access'
 gem 'spree_digital_assets' , github: 'vinsol-spree-contrib/spree_digital_assets'
 gem 'spree_html_invoice', git: 'https://github.com/vinsol-spree-contrib/spree-html-invoice', branch: 'master'
-
+gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings'
+gem 'spree_editor', github: 'spree-contrib/spree_editor'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
