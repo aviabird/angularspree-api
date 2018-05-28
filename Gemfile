@@ -47,6 +47,9 @@ gem 'spree_digital_assets' , github: 'vinsol-spree-contrib/spree_digital_assets'
 gem 'spree_html_invoice', git: 'https://github.com/vinsol-spree-contrib/spree-html-invoice', branch: 'master'
 gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings'
 gem 'spree_editor', github: 'spree-contrib/spree_editor'
+gem 'spree_related_products', github: 'spree-contrib/spree_related_products'
+gem 'spree_recently_viewed', github: 'spree-contrib/spree_recently_viewed'
+gem 'spree_reviews', github: 'spree-contrib/spree_reviews'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
