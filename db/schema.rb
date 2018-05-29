@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180518103103) do
+ActiveRecord::Schema.define(version: 20180527130715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -186,6 +186,18 @@ ActiveRecord::Schema.define(version: 20180518103103) do
     t.datetime "updated_at", null: false
     t.index ["user_id", "product_id"], name: "index_spree_favorites_on_user_id_and_product_id", unique: true
     t.index ["user_id"], name: "index_spree_favorites_on_user_id"
+  end
+
+  create_table "spree_feedback_reviews", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "review_id", null: false
+    t.integer "rating", default: 0
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "locale", default: "en"
+    t.index ["review_id"], name: "index_spree_feedback_reviews_on_review_id"
+    t.index ["user_id"], name: "index_spree_feedback_reviews_on_user_id"
   end
 
   create_table "spree_folders", id: :serial, force: :cascade do |t|
@@ -493,6 +505,8 @@ ActiveRecord::Schema.define(version: 20180518103103) do
     t.string "meta_title"
     t.datetime "discontinue_on"
     t.integer "favorite_users_count", default: 0
+    t.decimal "avg_rating", precision: 7, scale: 5, default: "0.0", null: false
+    t.integer "reviews_count", default: 0, null: false
     t.index ["available_on"], name: "index_spree_products_on_available_on"
     t.index ["deleted_at"], name: "index_spree_products_on_deleted_at"
     t.index ["discontinue_on"], name: "index_spree_products_on_discontinue_on"
@@ -672,6 +686,26 @@ ActiveRecord::Schema.define(version: 20180518103103) do
     t.index ["order_id"], name: "index_spree_reimbursements_on_order_id"
   end
 
+  create_table "spree_relation_types", id: :serial, force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "applies_to"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "spree_relations", id: :serial, force: :cascade do |t|
+    t.integer "relation_type_id"
+    t.string "relatable_type"
+    t.integer "relatable_id"
+    t.string "related_to_type"
+    t.integer "related_to_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal "discount_amount", precision: 8, scale: 2, default: "0.0"
+    t.integer "position"
+  end
+
   create_table "spree_return_authorization_reasons", force: :cascade do |t|
     t.string "name"
     t.boolean "active", default: true
@@ -720,6 +754,23 @@ ActiveRecord::Schema.define(version: 20180518103103) do
     t.index ["preferred_reimbursement_type_id"], name: "index_spree_return_items_on_preferred_reimbursement_type_id"
     t.index ["reimbursement_id"], name: "index_spree_return_items_on_reimbursement_id"
     t.index ["return_authorization_id"], name: "index_spree_return_items_on_return_authorization_id"
+  end
+
+  create_table "spree_reviews", id: :serial, force: :cascade do |t|
+    t.integer "product_id"
+    t.string "name"
+    t.string "location"
+    t.integer "rating"
+    t.text "title"
+    t.text "review"
+    t.boolean "approved", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.string "ip_address"
+    t.string "locale", default: "en"
+    t.boolean "show_identifier", default: true
+    t.index ["show_identifier"], name: "index_spree_reviews_on_show_identifier"
   end
 
   create_table "spree_role_users", force: :cascade do |t|
