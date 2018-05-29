@@ -18,6 +18,30 @@ GIT
       spree_backend (>= 3.1.0, < 4.0)
 
 GIT
+  remote: git://github.com/spree-contrib/spree_recently_viewed.git
+  revision: f49f188372131c33cb28eea391b77764548787bb
+  specs:
+    spree_recently_viewed (3.3.0)
+      spree_core (>= 3.1.0, < 4.0)
+
+GIT
+  remote: git://github.com/spree-contrib/spree_related_products.git
+  revision: 6d191fa6d3cb28abb310119d42d91ce9c9771e07
+  specs:
+    spree_related_products (3.3.0)
+      spree_backend (>= 3.1.0, < 4.0)
+      spree_extension
+
+GIT
+  remote: git://github.com/spree-contrib/spree_reviews.git
+  revision: 5e7965f18d0610f9954728e1cb03970f1d2c8fef
+  specs:
+    spree_reviews (3.3.0)
+      spree_auth_devise (>= 3.1.0, < 4.0)
+      spree_core (>= 3.1.0, < 4.0)
+      spree_extension
+
+GIT
   remote: git://github.com/vinsol-spree-contrib/spree_admin_roles_and_access.git
   revision: b03279a83574990e27ad637bcfa8a2079973c1e4
   specs:
@@ -518,6 +542,9 @@ DEPENDENCIES
   spree_gateway (~> 3.3)
   spree_html_invoice!
   spree_mail_settings!
+  spree_recently_viewed!
+  spree_related_products!
+  spree_reviews!
   spring
   turbolinks (= 5.1.1)
   uglifier (= 4.1.8)
