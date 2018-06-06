@@ -5,6 +5,7 @@ class Spree::ReviewsController < Spree::StoreController
 
   def index
     @approved_reviews = Spree::Review.approved.where(product: @product)
+    render json: {reviews: @approved_reviews}
   end
 
   def new
@@ -12,9 +13,8 @@ class Spree::ReviewsController < Spree::StoreController
     authorize! :create, @review
   end
 
-  # save if all ok
   def create
-    params[:review][:rating].sub!(/\s*[^0-9]*\z/, '') unless params[:review][:rating].blank?
+    params[:review][:rating].sub!(/\s*[^0-9]*\z/, "") unless params[:review][:rating].blank?
 
     @review = Spree::Review.new(review_params)
     @review.product = @product
@@ -24,13 +24,11 @@ class Spree::ReviewsController < Spree::StoreController
 
     authorize! :create, @review
     if @review.save
-      # flash[:notice] = Spree.t(:review_successfully_submitted)
       message = Spree.t(:review_successfully_submitted)
-      # redirect_to spree.product_path(@product)
-      render json: { message: message }
+      render json: {message: message}
     else
       message = "Unable to submit the review"
-      render json: { error: message }
+      render json: {error: message}
     end
   end
 
