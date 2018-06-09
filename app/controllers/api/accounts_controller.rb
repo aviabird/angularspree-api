@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Api::AccountsController < BaseController
-  before_action :check_authorization, except: :create
+  before_action :check_authorization, except: %i[create]
 
   def serialization_scope
     current_order
@@ -13,7 +15,7 @@ class Api::AccountsController < BaseController
       sign_in(:spree_user, @user)
       @order.update(user: @user) if @order && !@order.user
       @user.generate_spree_api_key!
-      
+
       render_user
     else
       invalid_resource!(@user)
@@ -26,7 +28,6 @@ class Api::AccountsController < BaseController
 
     render_user
   end
-
 
   def update
     authorize! :update, @user
@@ -41,7 +42,11 @@ class Api::AccountsController < BaseController
     end
   end
 
-private
+  def authenticated
+    render_user
+  end
+
+  private
 
   def spree_user_params
     params.require(:spree_user).permit(Spree::PermittedAttributes.user_attributes)
@@ -50,9 +55,13 @@ private
   def render_user
     serializer = params[:serializer] == 'full' ? UserSerializer : LiteUserSerializer
 
-    render json: @user,
-           root: false,
-           scope: @user,
-           serializer: serializer
+    if @user.present?
+      render json: @user,
+             root: false,
+             scope: @user,
+             serializer: serializer
+    else
+      render json: { status: 'unauthorized' }
+    end
   end
 end

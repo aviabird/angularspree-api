@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 class OauthController < BaseController
-    
   def create
     auth = Oauth.for(params[:provider]).new(params).call
 
@@ -18,4 +19,3 @@ class OauthController < BaseController
     end
   end
 end
-    

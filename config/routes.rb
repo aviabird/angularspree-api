@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   # This line mounts Spree's routes at the root of your application.
@@ -9,13 +11,13 @@ Rails.application.routes.draw do
   # We ask that you don't use the :as option here, as Spree relies on it being
   # the default of "spree".
   mount Spree::Core::Engine, at: '/'
-  
-  # Main application routes 
 
-  scope '/api', module: 'api', defaults: {format: :json} do
+  # Main application routes
+
+  scope '/api', module: 'api', defaults: { format: :json } do
     resources :taxonomies, only: :index
     get 'taxons/*permalink', to: 'taxons#show'
-    resources :products, only: %i(index show)
+    resources :products, only: %i[index show]
     resource :cart do
       post :add_variant
       post :guest_login
@@ -27,10 +29,11 @@ Rails.application.routes.draw do
     resources :credit_cards, only: :destroy
     resources :addresses, only: :destroy
     resources :countries, only: :index
-    resources :orders, only: %i(index show)
+    resources :orders, only: %i[index show]
   end
 
-  scope module: 'api', path: 'auth', defaults: {format: :json} do
+  scope module: 'api', path: 'auth', defaults: { format: :json } do
+    get 'authenticated', to: 'accounts#authenticated'
     resources :accounts
     resources :passwords
   end
@@ -40,5 +43,4 @@ Rails.application.routes.draw do
   namespace :spree do
     get 'user_favorite_products', to: 'favorite_products#user_favorite_products', as: 'user_favorite_products'
   end
-
 end

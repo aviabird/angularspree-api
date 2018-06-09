@@ -1,13 +1,15 @@
+# frozen_string_literal: true
+
 module Spree
   module Api
     class RelationsController < Spree::Api::BaseController
-      before_action :load_data, only: [:create, :destroy]
-      before_action :find_relation, only: [:update, :destroy]
+      before_action :load_data, only: %i[create destroy]
+      before_action :find_relation, only: %i[update destroy]
 
       def index
-      @product = Spree::Product.friendly.find(params[:product_id])
-      related_Products= Product.find(@product.relations.pluck(:related_to_id))
-      render :json => related_Products
+        @product = Spree::Product.friendly.find(params[:product_id])
+        related_products = Product.find(@product.relations.pluck(:related_to_id))
+        render json: related_products
       end
 
       def create
@@ -56,15 +58,15 @@ module Spree
       end
 
       def permitted_attributes
-        [
-          :related_to,
-          :relation_type,
-          :relatable,
-          :related_to_id,
-          :discount_amount,
-          :relation_type_id,
-          :related_to_type,
-          :position
+        %i[
+          related_to
+          relation_type
+          relatable
+          related_to_id
+          discount_amount
+          relation_type_id
+          related_to_type
+          position
         ]
       end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Spree::UserSessionsController < Devise::SessionsController
   helper Spree::BaseHelper
 
@@ -20,37 +22,37 @@ class Spree::UserSessionsController < Devise::SessionsController
     self.resource = warden.authenticate!(auth_options)
     if spree_user_signed_in?
       respond_to do |format|
-        format.html {
+        format.html do
           flash[:success] = Spree.t(:logged_in_succesfully)
           redirect_back_or_default(after_sign_in_path_for(spree_current_user))
-        }        
-        format.json {
+        end
+        format.json do
           @user = spree_current_user
-          @order = current_order({create_order_if_necessary: true})
+          @order = current_order(create_order_if_necessary: true)
           @current_user_roles = @user.spree_roles
-          
+
           render json: @user,
                  root: false,
                  scope: @user,
                  serializer: LiteUserSerializer
-        }
+        end
       end
     else
       respond_to do |format|
-        format.html {
+        format.html do
           flash.now[:error] = t('devise.failure.invalid')
           render :new
-        }        
-        format.json {
+        end
+        format.json do
           render json: { error: t('devise.failure.invalid') }, status: :unprocessable_entity, layout: false
-        }
+        end
       end
     end
   end
 
   def auth_options
     # This is to login spree_user(Spree::User)
-    { :scope => :spree_user }
+    { scope: :spree_user }
   end
 
   def destroy
@@ -69,12 +71,13 @@ class Spree::UserSessionsController < Devise::SessionsController
   end
 
   private
-    def accurate_title
-      Spree.t(:login)
-    end
 
-    def redirect_back_or_default(default)
-      redirect_to(session["spree_user_return_to"] || default)
-      session["spree_user_return_to"] = nil
-    end
+  def accurate_title
+    Spree.t(:login)
+  end
+
+  def redirect_back_or_default(default)
+    redirect_to(session['spree_user_return_to'] || default)
+    session['spree_user_return_to'] = nil
+  end
 end

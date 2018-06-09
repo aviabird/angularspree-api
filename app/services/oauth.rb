@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Oauth
   PROVIDERS = {
-      :google => Oauth::Google
-  }
+    google: Oauth::Google
+  }.freeze
 
   class OauthError < StandardError; end
   class OauthProviderNotImplemented < OauthError; end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddressesController < BaseController
   before_action :check_authorization
 
@@ -9,8 +11,8 @@ class AddressesController < BaseController
     @user.touch
 
     render json: address,
-                scope: @user,
-                serializer: AddressSerializer,
-                root: false
+           scope: @user,
+           serializer: AddressSerializer,
+           root: false
   end
 end

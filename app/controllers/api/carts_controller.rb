@@ -1,5 +1,6 @@
-class CartsController < BaseController
+# frozen_string_literal: true
 
+class CartsController < BaseController
   def show
     return not_found unless @order = current_order
 
@@ -36,7 +37,7 @@ class CartsController < BaseController
       variant_id: variant_id,
       quantity: params[:quantity]
     }
-    data.merge!(id: line_item.id) if line_item
+    data[:id] = line_item.id if line_item
     @order.contents.update_cart(line_items_attributes: { '0' => data })
 
     render_order
@@ -78,7 +79,7 @@ class CartsController < BaseController
   def destroy
     if @order = current_order
       @order.empty!
-      @order.state ='cart'
+      @order.state = 'cart'
       @order.save!
 
       render_order
@@ -97,7 +98,8 @@ class CartsController < BaseController
     end
   end
 
-private
+  private
+
   def render_order
     render json: @order,
            scope: spree_current_user,

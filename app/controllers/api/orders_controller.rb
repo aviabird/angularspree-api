@@ -1,29 +1,33 @@
-class Api::OrdersController < BaseController
-  before_action :check_authorization, only: :index
+# frozen_string_literal: true
 
-  def index
-    @orders = @user.orders.complete
+module Api
+  class OrdersController < BaseController
+    before_action :check_authorization, only: :index
 
-    render json: @orders,
-           scope: spree_current_user,
-           each_serializer: LiteOrderSerializer,
-           root: false
-  end
+    def index
+      @orders = @user.orders.complete
 
-  def show
-    token = request.headers['X-Spree-Order-Token']
-
-    if token.present?
-      @order = Spree::Order.find_by!(number: params[:id], guest_token: token)
-    else
-      check_authorization
-      authorize! :show, @user
-      @order = @user.orders.find_by!(number: params[:id])
+      render json: @orders,
+             scope: spree_current_user,
+             each_serializer: LiteOrderSerializer,
+             root: false
     end
 
-    render json: @order,
-           scope: spree_current_user,
-           serializer: OrderSerializer,
-           root: false
+    def show
+      token = request.headers['Order-Token']
+
+      if token.present?
+        @order = Spree::Order.find_by!(number: params[:id], guest_token: token)
+      else
+        check_authorization
+        authorize! :show, @user
+        @order = @user.orders.find_by!(number: params[:id])
+      end
+
+      render json: @order,
+             scope: spree_current_user,
+             serializer: OrderSerializer,
+             root: false
+    end
   end
 end
