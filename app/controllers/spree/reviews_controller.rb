@@ -5,7 +5,15 @@ class Spree::ReviewsController < Spree::StoreController
 
   def index
     @approved_reviews = Spree::Review.approved.where(product: @product)
-    render json: {reviews: @approved_reviews}
+    ratings_array = @approved_reviews.pluck(:rating)
+    total_ratings = @approved_reviews.count
+    rating_summery = calculate_reviews(ratings_array)
+
+    render json: {
+      reviews: @approved_reviews,
+      rating_summery: rating_summery,
+      total_ratings: total_ratings,
+    }
   end
 
   def new
@@ -44,5 +52,19 @@ class Spree::ReviewsController < Spree::StoreController
 
   def review_params
     params.require(:review).permit(permitted_review_attributes)
+  end
+
+  def calculate_reviews(ratings_array)
+    counts = Hash.new 0
+    ratings_array.each do |rate|
+      counts[rate] += 1
+    end
+
+    @rating_summery = []
+    counts.each do |key, value|
+      @rating_summery << {key => value, "percentage" => (value.to_f / ratings_array.count * 100)}
+    end
+
+    @rating_summery
   end
 end
