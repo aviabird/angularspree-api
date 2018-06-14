@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreditCardsController < BaseController
   before_action :check_authorization
 

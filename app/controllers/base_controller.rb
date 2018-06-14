@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 class BaseController < Spree::BaseController
   include Spree::Core::ControllerHelpers::Order
-  protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
-  
+  protect_from_forgery with: :null_session,
+                       if: proc { |c| c.request.format == 'application/json' }
+
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
   respond_to :json
@@ -14,7 +17,8 @@ class BaseController < Spree::BaseController
   before_action :load_user_roles
   # before_action :set_language
 
-protected
+  protected
+
   def set_language
     I18n.locale = if session.key?(:locale)
                     session[:locale]
@@ -24,7 +28,7 @@ protected
   end
 
   def unauthorized
-    render json: {status: 'unauthorized'}, status: 401
+    render json: { status: 'unauthorized' }, status: 401
   end
 
   def check_authorization
@@ -39,23 +43,20 @@ protected
 
   def load_user_roles
     @current_user_roles = if @spree_current_user
-      @spree_current_user.spree_roles.pluck(:name)
-    else
-      []
-    end
+                            @spree_current_user.spree_roles.pluck(:name)
+                          else
+                            []
+                          end
   end
 
   def set_current_user
-    token = request.headers["X-Spree-Token"]
+    token = request.headers['Auth-Token']
     @spree_current_user = Spree::User.find_by_spree_api_key(token)
   end
 
-  def spree_current_user
-    @spree_current_user
-  end
+  attr_reader :spree_current_user
 
   def invalid_resource!(resource)
     render json: { errors: resource.errors.messages }, status: 422
   end
-
 end

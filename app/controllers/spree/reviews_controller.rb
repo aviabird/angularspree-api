@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Spree::ReviewsController < Spree::StoreController
   helper Spree::BaseHelper
-  before_action :load_product, only: [:index, :new, :create]
+  before_action :load_product, only: %i[index new create]
   rescue_from ActiveRecord::RecordNotFound, with: :render_404
 
   def index
@@ -12,7 +14,7 @@ class Spree::ReviewsController < Spree::StoreController
     render json: {
       reviews: @approved_reviews,
       rating_summery: rating_summery,
-      total_ratings: total_ratings,
+      total_ratings: total_ratings
     }
   end
 
@@ -22,21 +24,20 @@ class Spree::ReviewsController < Spree::StoreController
   end
 
   def create
-    params[:review][:rating].sub!(/\s*[^0-9]*\z/, "") unless params[:review][:rating].blank?
+    params[:review][:rating].sub!(/\s*[^0-9]*\z/, '') unless params[:review][:rating].blank?
 
     @review = Spree::Review.new(review_params)
     @review.product = @product
     @review.user = spree_current_user if spree_user_signed_in?
     @review.ip_address = request.remote_ip
     @review.locale = I18n.locale.to_s if Spree::Reviews::Config[:track_locale]
-
     authorize! :create, @review
     if @review.save
       message = Spree.t(:review_successfully_submitted)
-      render json: {message: message}
+      render json: { message: message }
     else
-      message = "Unable to submit the review"
-      render json: {error: message}
+      message = 'Unable to submit the review'
+      render json: { error: message }
     end
   end
 
@@ -47,7 +48,7 @@ class Spree::ReviewsController < Spree::StoreController
   end
 
   def permitted_review_attributes
-    [:rating, :title, :review, :name, :show_identifier]
+    %i[rating title review name show_identifier]
   end
 
   def review_params
@@ -62,7 +63,7 @@ class Spree::ReviewsController < Spree::StoreController
 
     @rating_summery = []
     counts.each do |key, value|
-      @rating_summery << {key => value, "percentage" => (value.to_f / ratings_array.count * 100)}
+      @rating_summery << { key => value, 'percentage' => (value.to_f / ratings_array.count * 100) }
     end
 
     @rating_summery

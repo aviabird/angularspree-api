@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::ProductsController < BaseController
   before_action :find_taxon_id, only: :index
 
@@ -9,9 +11,9 @@ class Api::ProductsController < BaseController
     @cache_key = [I18n.locale,
                   @current_user_roles.include?('admin'),
                   current_currency,
-                  params.slice(:keywords, :search, :taxon, 
+                  params.slice(:keywords, :search, :taxon,
                                :taxons, :option_types,
-                               :browse_mode, :price_min, 
+                               :browse_mode, :price_min,
                                :price_max, :properties,
                                :sorting, :per_page, :page).to_s]
 
@@ -39,7 +41,7 @@ class Api::ProductsController < BaseController
   private
 
   def product_scope
-    Spree::Product.active.includes(:option_types, :taxons, master: %i(images option_values prices), product_properties: [:property], variants: %i(images option_values prices))
+    Spree::Product.active.includes(:option_types, :taxons, master: %i[images option_values prices], product_properties: [:property], variants: %i[images option_values prices])
   end
 
   def find_taxon_id

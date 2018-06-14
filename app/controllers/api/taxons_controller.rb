@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TaxonsController < BaseController
   def show
     @taxon = Spree::Taxon.where(permalink: params[:permalink]).first!

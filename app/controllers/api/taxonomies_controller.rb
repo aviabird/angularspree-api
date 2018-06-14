@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TaxonomiesController < ApplicationController
   def index
     @taxonomies = Spree::Taxonomy.order('name').includes(root: :children)
