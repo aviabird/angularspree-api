@@ -1,24 +1,14 @@
-# README
+== README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## For setup follow these steps.
 
-Things you may want to cover:
+* Install all dependencies `$ bundle install`
+* Run all migrations `$ rake db:migrate`
+* Load seed data `rake db:seed`
+* Load sample data `rake spree_sample:load`
 
-* Ruby version
+## Demo
 
-* System dependencies
+Try with direct deployment on Heroku:
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/aviabird/angularspree-api)
