@@ -73,7 +73,7 @@ gem 'spree_gateway', '~> 3.3'
 
 # Spree Extensions
 gem 'spree_admin_roles_and_access', github: 'vinsol-spree-contrib/spree_admin_roles_and_access'
-gem 'spree_digital_assets', github: 'vinsol-spree-contrib/spree_digital_assets'
+# gem 'spree_digital_assets', github: 'vinsol-spree-contrib/spree_digital_assets'
 gem 'spree_editor', github: 'spree-contrib/spree_editor'
 gem 'spree_favorite_products', github: 'vinsol-spree-contrib/spree_favorite_products'
 gem 'spree_html_invoice', github: 'vinsol-spree-contrib/spree-html-invoice', branch: 'master'
@@ -94,3 +94,6 @@ gem 'rack-cors', require: 'rack/cors'
 # reference https://gist.github.com/JagdeepSingh/4b03cbeab16cc0bc729bbc6d275402d3
 gem 'rmagick'
 gem 'oj'
+
+
+gem "aws-sdk-s3", require: false

@@ -12,5 +12,4 @@
 
 //= require admin/spree_favorite_products
 //= require spree/backend/spree_admin_roles_and_access
-//= require spree/backend/spree_digital_assets
 //= require spree/backend/spree_reviews
