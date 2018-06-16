@@ -16,6 +16,5 @@
 
 //= require spree/frontend/spree_favorite_products
 //= require spree/frontend/spree_admin_roles_and_access
-//= require spree/frontend/spree_digital_assets
 //= require spree/frontend/spree_recently_viewed
 //= require spree/frontend/spree_reviews
