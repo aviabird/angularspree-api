@@ -22,6 +22,10 @@
     "ADMIN_PASSWORD": {
       "description": "We will create an admin user with this password.",
       "value": "spree123"
+    },
+    "RAILS_MASTER_KEY": {
+      "description": "Master key",
+      "value": "enter your master key"
     }
   }
 }

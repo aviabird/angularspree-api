@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
+ruby '2.5.1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # Use Puma as the app server
@@ -92,7 +94,6 @@ end
 gem 'rack-cors', require: 'rack/cors'
 
 # reference https://gist.github.com/JagdeepSingh/4b03cbeab16cc0bc729bbc6d275402d3
-gem 'rmagick'
 gem 'oj'
 
 
