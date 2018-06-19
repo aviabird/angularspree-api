@@ -114,6 +114,7 @@ GEM
       actionpack (= 5.2.0)
       activerecord (= 5.2.0)
       marcel (~> 0.3.1)
+    activestorage-cloudinary-service (0.1.0)
     activesupport (5.2.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
@@ -148,6 +149,7 @@ GEM
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.0)
     aws-sigv4 (1.0.2)
+    aws_cf_signer (0.1.3)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
@@ -186,6 +188,9 @@ GEM
       orm_adapter (~> 0.5.0)
     cldr-plurals-runtime-rb (1.0.1)
     climate_control (0.2.0)
+    cloudinary (1.9.1)
+      aws_cf_signer
+      rest-client
     cocaine (0.6.0)
       terrapin (= 0.6.0)
     codeclimate-engine-rb (0.4.1)
@@ -218,6 +223,8 @@ GEM
       warden (~> 1.2.3)
     devise-encryptable (0.2.0)
       devise (>= 2.1.0)
+    domain_name (0.5.20180417)
+      unf (>= 0.0.5, < 1.0.0)
     dotenv (2.4.0)
     dotenv-rails (2.4.0)
       dotenv (= 2.4.0)
@@ -243,6 +250,8 @@ GEM
       activesupport (>= 4.2.0)
     highline (1.6.21)
     htmlentities (4.3.4)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
     httpclient (2.8.3)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
@@ -300,6 +309,7 @@ GEM
       i18n (>= 0.6.4, < 1.1)
     msgpack (1.2.4)
     multi_json (1.13.1)
+    netrc (0.11.0)
     nio4r (2.3.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
@@ -384,6 +394,10 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
+    rest-client (2.0.2)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
     rubocop (0.57.2)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -525,6 +539,9 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.11)
       execjs (>= 0.3.0, < 3)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.5)
     unicode-display_width (1.4.0)
     versioncake (3.4.0)
       actionpack (>= 3.2)
@@ -554,11 +571,13 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  activestorage-cloudinary-service
   aws-sdk-s3
   bootsnap (>= 1.1.0)
   byebug
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
+  cloudinary
   coffee-rails (~> 4.2)
   dotenv-rails
   httpclient
