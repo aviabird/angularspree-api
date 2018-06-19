@@ -1,69 +1,177 @@
-                Prefix Verb   URI Pattern                           Controller#Action
-                 spree        /spree                                Spree::Core::Engine
-            taxonomies GET    /api/taxonomies(.:format)             api/taxonomies#index {:format=>:json}
-                       GET    /api/taxons/*permalink(.:format)      api/taxons#show {:format=>:json}
-              products GET    /api/products(.:format)               api/products#index {:format=>:json}
-               product GET    /api/products/:id(.:format)           api/products#show {:format=>:json}
-      add_variant_cart POST   /api/cart/add_variant(.:format)       api/carts#add_variant {:format=>:json}
-      guest_login_cart POST   /api/cart/guest_login(.:format)       api/carts#guest_login {:format=>:json}
-   update_variant_cart PUT    /api/cart/update_variant(.:format)    api/carts#update_variant {:format=>:json}
-   change_variant_cart PUT    /api/cart/change_variant(.:format)    api/carts#change_variant {:format=>:json}
-remove_adjustment_cart PUT    /api/cart/remove_adjustment(.:format) api/carts#remove_adjustment {:format=>:json}
-   remove_variant_cart DELETE /api/cart/remove_variant(.:format)    api/carts#remove_variant {:format=>:json}
-                  cart POST   /api/cart(.:format)                   api/carts#create {:format=>:json}
-              new_cart GET    /api/cart/new(.:format)               api/carts#new {:format=>:json}
-             edit_cart GET    /api/cart/edit(.:format)              api/carts#edit {:format=>:json}
-                       GET    /api/cart(.:format)                   api/carts#show {:format=>:json}
-                       PATCH  /api/cart(.:format)                   api/carts#update {:format=>:json}
-                       PUT    /api/cart(.:format)                   api/carts#update {:format=>:json}
-                       DELETE /api/cart(.:format)                   api/carts#destroy {:format=>:json}
-               account POST   /api/account(.:format)                api/accounts#create {:format=>:json}
-           new_account GET    /api/account/new(.:format)            api/accounts#new {:format=>:json}
-          edit_account GET    /api/account/edit(.:format)           api/accounts#edit {:format=>:json}
-                       GET    /api/account(.:format)                api/accounts#show {:format=>:json}
-                       PATCH  /api/account(.:format)                api/accounts#update {:format=>:json}
-                       PUT    /api/account(.:format)                api/accounts#update {:format=>:json}
-                       DELETE /api/account(.:format)                api/accounts#destroy {:format=>:json}
-             passwords GET    /api/passwords(.:format)              api/passwords#index {:format=>:json}
-                       POST   /api/passwords(.:format)              api/passwords#create {:format=>:json}
-          new_password GET    /api/passwords/new(.:format)          api/passwords#new {:format=>:json}
-         edit_password GET    /api/passwords/:id/edit(.:format)     api/passwords#edit {:format=>:json}
-              password GET    /api/passwords/:id(.:format)          api/passwords#show {:format=>:json}
-                       PATCH  /api/passwords/:id(.:format)          api/passwords#update {:format=>:json}
-                       PUT    /api/passwords/:id(.:format)          api/passwords#update {:format=>:json}
-                       DELETE /api/passwords/:id(.:format)          api/passwords#destroy {:format=>:json}
-           credit_card DELETE /api/credit_cards/:id(.:format)       api/credit_cards#destroy {:format=>:json}
-               address DELETE /api/addresses/:id(.:format)          api/addresses#destroy {:format=>:json}
-             countries GET    /api/countries(.:format)              api/countries#index {:format=>:json}
-                orders GET    /api/orders(.:format)                 api/orders#index {:format=>:json}
-                 order GET    /api/orders/:id(.:format)             api/orders#show {:format=>:json}
+                      Prefix Verb   URI Pattern                                                                              Controller#Action
+                    ckeditor        /ckeditor                                                                                Ckeditor::Engine
+                       spree        /                                                                                        Spree::Core::Engine
+                  taxonomies GET    /api/taxonomies(.:format)                                                                api/taxonomies#index {:format=>:json}
+                             GET    /api/taxons/*permalink(.:format)                                                         api/taxons#show {:format=>:json}
+                    products GET    /api/products(.:format)                                                                  api/products#index {:format=>:json}
+                     product GET    /api/products/:id(.:format)                                                              api/products#show {:format=>:json}
+            add_variant_cart POST   /api/cart/add_variant(.:format)                                                          api/carts#add_variant {:format=>:json}
+            guest_login_cart POST   /api/cart/guest_login(.:format)                                                          api/carts#guest_login {:format=>:json}
+         update_variant_cart PUT    /api/cart/update_variant(.:format)                                                       api/carts#update_variant {:format=>:json}
+         change_variant_cart PUT    /api/cart/change_variant(.:format)                                                       api/carts#change_variant {:format=>:json}
+      remove_adjustment_cart PUT    /api/cart/remove_adjustment(.:format)                                                    api/carts#remove_adjustment {:format=>:json}
+         remove_variant_cart DELETE /api/cart/remove_variant(.:format)                                                       api/carts#remove_variant {:format=>:json}
+                    new_cart GET    /api/cart/new(.:format)                                                                  api/carts#new {:format=>:json}
+                   edit_cart GET    /api/cart/edit(.:format)                                                                 api/carts#edit {:format=>:json}
+                        cart GET    /api/cart(.:format)                                                                      api/carts#show {:format=>:json}
+                             PATCH  /api/cart(.:format)                                                                      api/carts#update {:format=>:json}
+                             PUT    /api/cart(.:format)                                                                      api/carts#update {:format=>:json}
+                             DELETE /api/cart(.:format)                                                                      api/carts#destroy {:format=>:json}
+                             POST   /api/cart(.:format)                                                                      api/carts#create {:format=>:json}
+                 credit_card DELETE /api/credit_cards/:id(.:format)                                                          api/credit_cards#destroy {:format=>:json}
+                     address DELETE /api/addresses/:id(.:format)                                                             api/addresses#destroy {:format=>:json}
+                   countries GET    /api/countries(.:format)                                                                 api/countries#index {:format=>:json}
+                      orders GET    /api/orders(.:format)                                                                    api/orders#index {:format=>:json}
+                       order GET    /api/orders/:id(.:format)                                                                api/orders#show {:format=>:json}
+               authenticated GET    /auth/authenticated(.:format)                                                            api/accounts#authenticated {:format=>:json}
+                    accounts GET    /auth/accounts(.:format)                                                                 api/accounts#index {:format=>:json}
+                             POST   /auth/accounts(.:format)                                                                 api/accounts#create {:format=>:json}
+                 new_account GET    /auth/accounts/new(.:format)                                                             api/accounts#new {:format=>:json}
+                edit_account GET    /auth/accounts/:id/edit(.:format)                                                        api/accounts#edit {:format=>:json}
+                     account GET    /auth/accounts/:id(.:format)                                                             api/accounts#show {:format=>:json}
+                             PATCH  /auth/accounts/:id(.:format)                                                             api/accounts#update {:format=>:json}
+                             PUT    /auth/accounts/:id(.:format)                                                             api/accounts#update {:format=>:json}
+                             DELETE /auth/accounts/:id(.:format)                                                             api/accounts#destroy {:format=>:json}
+                   passwords GET    /auth/passwords(.:format)                                                                api/passwords#index {:format=>:json}
+                             POST   /auth/passwords(.:format)                                                                api/passwords#create {:format=>:json}
+                new_password GET    /auth/passwords/new(.:format)                                                            api/passwords#new {:format=>:json}
+               edit_password GET    /auth/passwords/:id/edit(.:format)                                                       api/passwords#edit {:format=>:json}
+                    password GET    /auth/passwords/:id(.:format)                                                            api/passwords#show {:format=>:json}
+                             PATCH  /auth/passwords/:id(.:format)                                                            api/passwords#update {:format=>:json}
+                             PUT    /auth/passwords/:id(.:format)                                                            api/passwords#update {:format=>:json}
+                             DELETE /auth/passwords/:id(.:format)                                                            api/passwords#destroy {:format=>:json}
+                             POST   /auth/:provider(.:format)                                                                oauth#create
+spree_user_favorite_products GET    /spree/user_favorite_products(.:format)                                                  spree/favorite_products#user_favorite_products
+          rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
+   rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
+          rails_disk_service GET    /rails/active_storage/disk/:encoded_key/*filename(.:format)                              active_storage/disk#show
+   update_rails_disk_service PUT    /rails/active_storage/disk/:encoded_token(.:format)                                      active_storage/disk#update
+        rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
+
+Routes for Ckeditor::Engine:
+        pictures GET    /pictures(.:format)             ckeditor/pictures#index
+                 POST   /pictures(.:format)             ckeditor/pictures#create
+         picture DELETE /pictures/:id(.:format)         ckeditor/pictures#destroy
+attachment_files GET    /attachment_files(.:format)     ckeditor/attachment_files#index
+                 POST   /attachment_files(.:format)     ckeditor/attachment_files#create
+ attachment_file DELETE /attachment_files/:id(.:format) ckeditor/attachment_files#destroy
 
 Routes for Spree::Core::Engine:
-                     skrill_cancel_order_checkout GET                       /orders/:order_id/checkout/skrill_cancel(.:format)                            spree/checkout#skrill_cancel
-                     skrill_return_order_checkout GET                       /orders/:order_id/checkout/skrill_return(.:format)                            spree/checkout#skrill_return
-                                   order_checkout POST                      /orders/:order_id/checkout(.:format)                                          spree/checkout#create
-                               new_order_checkout GET                       /orders/:order_id/checkout/new(.:format)                                      spree/checkout#new
-                              edit_order_checkout GET                       /orders/:order_id/checkout/edit(.:format)                                     spree/checkout#edit
-                                                  GET                       /orders/:order_id/checkout(.:format)                                          spree/checkout#show
-                                                  PATCH                     /orders/:order_id/checkout(.:format)                                          spree/checkout#update
-                                                  PUT                       /orders/:order_id/checkout(.:format)                                          spree/checkout#update
-                                                  DELETE                    /orders/:order_id/checkout(.:format)                                          spree/checkout#destroy
-                                           skrill POST                      /skrill(.:format)                                                             spree/skrill_status#update
+                     users_admin_favorite_product GET                       /admin/favorite_products/:id/users(.:format)                                  spree/admin/products#favorite_users
+                          admin_favorite_products GET                       /admin/favorite_products(.:format)                                            spree/admin/favorite_products#index
+                           admin_favorite_product DELETE                    /admin/favorite_products/:id(.:format)                                        spree/admin/favorite_products#destroy
+                          admin_favorite_variants GET                       /admin/favorite_variants(.:format)                                            spree/admin/favorite_variants#index
+                     favorite_users_admin_product GET                       /admin/products/:id/favorite_users(.:format)                                  spree/admin/products#favorite_users
+                                   admin_products GET                       /admin/products(.:format)                                                     spree/admin/products#index
+                                                  POST                      /admin/products(.:format)                                                     spree/admin/products#create
+                                new_admin_product GET                       /admin/products/new(.:format)                                                 spree/admin/products#new
+                               edit_admin_product GET                       /admin/products/:id/edit(.:format)                                            spree/admin/products#edit
+                                    admin_product GET                       /admin/products/:id(.:format)                                                 spree/admin/products#show
+                                                  PATCH                     /admin/products/:id(.:format)                                                 spree/admin/products#update
+                                                  PUT                       /admin/products/:id(.:format)                                                 spree/admin/products#update
+                                                  DELETE                    /admin/products/:id(.:format)                                                 spree/admin/products#destroy
+                     favorite_products_admin_user GET                       /admin/users/:id/favorite_products(.:format)                                  spree/admin/users#favorite_products
+                                      admin_users GET                       /admin/users(.:format)                                                        spree/admin/users#index
+                                                  POST                      /admin/users(.:format)                                                        spree/admin/users#create
+                                   new_admin_user GET                       /admin/users/new(.:format)                                                    spree/admin/users#new
+                                  edit_admin_user GET                       /admin/users/:id/edit(.:format)                                               spree/admin/users#edit
+                                       admin_user GET                       /admin/users/:id(.:format)                                                    spree/admin/users#show
+                                                  PATCH                     /admin/users/:id(.:format)                                                    spree/admin/users#update
+                                                  PUT                       /admin/users/:id(.:format)                                                    spree/admin/users#update
+                                                  DELETE                    /admin/users/:id(.:format)                                                    spree/admin/users#destroy
+           get_favoritable_value_favorite_product GET                       /favorite_products/:id/get_favoritable_value(.:format)                        spree/favorite_products#get_favoritable_value
+                                favorite_products GET                       /favorite_products(.:format)                                                  spree/favorite_products#index
+                                                  POST                      /favorite_products(.:format)                                                  spree/favorite_products#create
+                                 favorite_product DELETE                    /favorite_products/:id(.:format)                                              spree/favorite_products#destroy
+                                      admin_roles GET                       /admin/roles(.:format)                                                        spree/admin/roles#index
+                                                  POST                      /admin/roles(.:format)                                                        spree/admin/roles#create
+                                   new_admin_role GET                       /admin/roles/new(.:format)                                                    spree/admin/roles#new
+                                  edit_admin_role GET                       /admin/roles/:id/edit(.:format)                                               spree/admin/roles#edit
+                                       admin_role PATCH                     /admin/roles/:id(.:format)                                                    spree/admin/roles#update
+                                                  PUT                       /admin/roles/:id(.:format)                                                    spree/admin/roles#update
+                                                  DELETE                    /admin/roles/:id(.:format)                                                    spree/admin/roles#destroy
+                                admin_permissions GET                       /admin/permissions(.:format)                                                  spree/admin/permissions#index
+                                                  POST                      /admin/permissions(.:format)                                                  spree/admin/permissions#create
+                             new_admin_permission GET                       /admin/permissions/new(.:format)                                              spree/admin/permissions#new
+                            edit_admin_permission GET                       /admin/permissions/:id/edit(.:format)                                         spree/admin/permissions#edit
+                                 admin_permission PATCH                     /admin/permissions/:id(.:format)                                              spree/admin/permissions#update
+                                                  PUT                       /admin/permissions/:id(.:format)                                              spree/admin/permissions#update
+                                                  DELETE                    /admin/permissions/:id(.:format)                                              spree/admin/permissions#destroy
+                            admin_permission_sets GET                       /admin/permission_sets(.:format)                                              spree/admin/permission_sets#index
+                                                  POST                      /admin/permission_sets(.:format)                                              spree/admin/permission_sets#create
+                         new_admin_permission_set GET                       /admin/permission_sets/new(.:format)                                          spree/admin/permission_sets#new
+                        edit_admin_permission_set GET                       /admin/permission_sets/:id/edit(.:format)                                     spree/admin/permission_sets#edit
+                             admin_permission_set GET                       /admin/permission_sets/:id(.:format)                                          spree/admin/permission_sets#show
+                                                  PATCH                     /admin/permission_sets/:id(.:format)                                          spree/admin/permission_sets#update
+                                                  PUT                       /admin/permission_sets/:id(.:format)                                          spree/admin/permission_sets#update
+                                                  DELETE                    /admin/permission_sets/:id(.:format)                                          spree/admin/permission_sets#destroy
+                    admin_default_admin_dashboard GET                       /admin/default_admin_dashboard(.:format)                                      spree/admin/default_admin_dashboards#show
+                             approve_admin_review GET                       /admin/reviews/:id/approve(.:format)                                          spree/admin/reviews#approve
+                    admin_review_feedback_reviews GET                       /admin/reviews/:review_id/feedback_reviews(.:format)                          spree/admin/feedback_reviews#index
+                     admin_review_feedback_review DELETE                    /admin/reviews/:review_id/feedback_reviews/:id(.:format)                      spree/admin/feedback_reviews#destroy
+                                    admin_reviews GET                       /admin/reviews(.:format)                                                      spree/admin/reviews#index
+                                edit_admin_review GET                       /admin/reviews/:id/edit(.:format)                                             spree/admin/reviews#edit
+                                     admin_review PATCH                     /admin/reviews/:id(.:format)                                                  spree/admin/reviews#update
+                                                  PUT                       /admin/reviews/:id(.:format)                                                  spree/admin/reviews#update
+                                                  DELETE                    /admin/reviews/:id(.:format)                                                  spree/admin/reviews#destroy
+                       edit_admin_review_settings GET                       /admin/review_settings/edit(.:format)                                         spree/admin/review_settings#edit
+                            admin_review_settings PATCH                     /admin/review_settings(.:format)                                              spree/admin/review_settings#update
+                                                  PUT                       /admin/review_settings(.:format)                                              spree/admin/review_settings#update
+                                  product_reviews GET                       /products/:product_id/reviews(.:format)                                       spree/reviews#index
+                                                  POST                      /products/:product_id/reviews(.:format)                                       spree/reviews#create
+                               new_product_review GET                       /products/:product_id/reviews/new(.:format)                                   spree/reviews#new
+                                 feedback_reviews POST                      /reviews/:review_id/feedback(.:format)                                        spree/feedback_reviews#create
+                             admin_relation_types GET                       /admin/relation_types(.:format)                                               spree/admin/relation_types#index
+                                                  POST                      /admin/relation_types(.:format)                                               spree/admin/relation_types#create
+                          new_admin_relation_type GET                       /admin/relation_types/new(.:format)                                           spree/admin/relation_types#new
+                         edit_admin_relation_type GET                       /admin/relation_types/:id/edit(.:format)                                      spree/admin/relation_types#edit
+                              admin_relation_type GET                       /admin/relation_types/:id(.:format)                                           spree/admin/relation_types#show
+                                                  PATCH                     /admin/relation_types/:id(.:format)                                           spree/admin/relation_types#update
+                                                  PUT                       /admin/relation_types/:id(.:format)                                           spree/admin/relation_types#update
+                                                  DELETE                    /admin/relation_types/:id(.:format)                                           spree/admin/relation_types#destroy
+                            related_admin_product GET                       /admin/products/:id/related(.:format)                                         spree/admin/products#related
+         update_positions_admin_product_relations POST                      /admin/products/:product_id/relations/update_positions(.:format)              spree/admin/relations#update_positions
+                          admin_product_relations GET                       /admin/products/:product_id/relations(.:format)                               spree/admin/relations#index
+                                                  POST                      /admin/products/:product_id/relations(.:format)                               spree/admin/relations#create
+                       new_admin_product_relation GET                       /admin/products/:product_id/relations/new(.:format)                           spree/admin/relations#new
+                      edit_admin_product_relation GET                       /admin/products/:product_id/relations/:id/edit(.:format)                      spree/admin/relations#edit
+                           admin_product_relation GET                       /admin/products/:product_id/relations/:id(.:format)                           spree/admin/relations#show
+                                                  PATCH                     /admin/products/:product_id/relations/:id(.:format)                           spree/admin/relations#update
+                                                  PUT                       /admin/products/:product_id/relations/:id(.:format)                           spree/admin/relations#update
+                                                  DELETE                    /admin/products/:product_id/relations/:id(.:format)                           spree/admin/relations#destroy
+                              related_api_product GET                       /api/products/:id/related(.:format)                                           spree/api/products#related {:format=>"json"}
+           update_positions_api_product_relations POST                      /api/products/:product_id/relations/update_positions(.:format)                spree/api/relations#update_positions {:format=>"json"}
+                            api_product_relations GET                       /api/products/:product_id/relations(.:format)                                 spree/api/relations#index {:format=>"json"}
+                                                  POST                      /api/products/:product_id/relations(.:format)                                 spree/api/relations#create {:format=>"json"}
+                         new_api_product_relation GET                       /api/products/:product_id/relations/new(.:format)                             spree/api/relations#new {:format=>"json"}
+                        edit_api_product_relation GET                       /api/products/:product_id/relations/:id/edit(.:format)                        spree/api/relations#edit {:format=>"json"}
+                             api_product_relation GET                       /api/products/:product_id/relations/:id(.:format)                             spree/api/relations#show {:format=>"json"}
+                                                  PATCH                     /api/products/:product_id/relations/:id(.:format)                             spree/api/relations#update {:format=>"json"}
+                                                  PUT                       /api/products/:product_id/relations/:id(.:format)                             spree/api/relations#update {:format=>"json"}
+                                                  DELETE                    /api/products/:product_id/relations/:id(.:format)                             spree/api/relations#destroy {:format=>"json"}
+                         recently_viewed_products GET                       /recently_viewed_products(.:format)                                           spree/products#recently_viewed
+                       testmail_admin_mail_method POST                      /admin/mail_method/testmail(.:format)                                         spree/admin/mail_methods#testmail
+                           edit_admin_mail_method GET                       /admin/mail_method/edit(.:format)                                             spree/admin/mail_methods#edit
+                                admin_mail_method PATCH                     /admin/mail_method(.:format)                                                  spree/admin/mail_methods#update
+                                                  PUT                       /admin/mail_method(.:format)                                                  spree/admin/mail_methods#update
+                       edit_admin_editor_settings GET                       /admin/editor_settings/edit(.:format)                                         spree/admin/editor_settings#edit
+                            admin_editor_settings PATCH                     /admin/editor_settings(.:format)                                              spree/admin/editor_settings#update
+                                                  PUT                       /admin/editor_settings(.:format)                                              spree/admin/editor_settings#update
                            new_spree_user_session GET                       /user/spree_user/sign_in(.:format)                                            spree/user_sessions#new
                                spree_user_session POST                      /user/spree_user/sign_in(.:format)                                            spree/user_sessions#create
                        destroy_spree_user_session GET                       /user/spree_user/logout(.:format)                                             spree/user_sessions#destroy
-                              spree_user_password POST                      /user/spree_user/password(.:format)                                           spree/user_passwords#create
                           new_spree_user_password GET                       /user/spree_user/password/new(.:format)                                       spree/user_passwords#new
                          edit_spree_user_password GET                       /user/spree_user/password/edit(.:format)                                      spree/user_passwords#edit
-                                                  PATCH                     /user/spree_user/password(.:format)                                           spree/user_passwords#update
+                              spree_user_password PATCH                     /user/spree_user/password(.:format)                                           spree/user_passwords#update
                                                   PUT                       /user/spree_user/password(.:format)                                           spree/user_passwords#update
+                                                  POST                      /user/spree_user/password(.:format)                                           spree/user_passwords#create
                    cancel_spree_user_registration GET                       /user/spree_user/cancel(.:format)                                             spree/user_registrations#cancel
-                          spree_user_registration POST                      /user/spree_user(.:format)                                                    spree/user_registrations#create
                       new_spree_user_registration GET                       /user/spree_user/sign_up(.:format)                                            spree/user_registrations#new
                      edit_spree_user_registration GET                       /user/spree_user/edit(.:format)                                               spree/user_registrations#edit
-                                                  PATCH                     /user/spree_user(.:format)                                                    spree/user_registrations#update
+                          spree_user_registration PATCH                     /user/spree_user(.:format)                                                    spree/user_registrations#update
                                                   PUT                       /user/spree_user(.:format)                                                    spree/user_registrations#update
                                                   DELETE                    /user/spree_user(.:format)                                                    spree/user_registrations#destroy
+                                                  POST                      /user/spree_user(.:format)                                                    spree/user_registrations#create
                                         edit_user GET                       /users/:id/edit(.:format)                                                     spree/users#edit
                                              user PATCH                     /users/:id(.:format)                                                          spree/users#update
                                                   PUT                       /users/:id(.:format)                                                          spree/users#update
@@ -79,30 +187,33 @@ Routes for Spree::Core::Engine:
                             checkout_registration GET                       /checkout/registration(.:format)                                              spree/checkout#registration
                      update_checkout_registration PUT                       /checkout/registration(.:format)                                              spree/checkout#update_registration
                                      account_link GET                       /account_link(.:format)                                                       spree/store#account_link
-                                          account POST                      /account(.:format)                                                            spree/users#create
                                       new_account GET                       /account/new(.:format)                                                        spree/users#new
                                      edit_account GET                       /account/edit(.:format)                                                       spree/users#edit
-                                                  GET                       /account(.:format)                                                            spree/users#show
+                                          account GET                       /account(.:format)                                                            spree/users#show
                                                   PATCH                     /account(.:format)                                                            spree/users#update
                                                   PUT                       /account(.:format)                                                            spree/users#update
                                                   DELETE                    /account(.:format)                                                            spree/users#destroy
+                                                  POST                      /account(.:format)                                                            spree/users#create
                      new_admin_spree_user_session GET                       /user/spree_user/sign_in(.:format)                                            spree/admin/user_sessions#new
                          admin_spree_user_session POST                      /user/spree_user/sign_in(.:format)                                            spree/admin/user_sessions#create
                  destroy_admin_spree_user_session GET                       /user/spree_user/logout(.:format)                                             spree/admin/user_sessions#destroy
-                        admin_spree_user_password POST                      /user/spree_user/password(.:format)                                           spree/admin/user_passwords#create
                     new_admin_spree_user_password GET                       /user/spree_user/password/new(.:format)                                       spree/admin/user_passwords#new
                    edit_admin_spree_user_password GET                       /user/spree_user/password/edit(.:format)                                      spree/admin/user_passwords#edit
-                                                  PATCH                     /user/spree_user/password(.:format)                                           spree/admin/user_passwords#update
+                        admin_spree_user_password PATCH                     /user/spree_user/password(.:format)                                           spree/admin/user_passwords#update
                                                   PUT                       /user/spree_user/password(.:format)                                           spree/admin/user_passwords#update
+                                                  POST                      /user/spree_user/password(.:format)                                           spree/admin/user_passwords#create
                                admin_unauthorized GET                       /admin/authorization_failure(.:format)                                        spree/admin/user_sessions#authorization_failure
                                       admin_login GET                       /admin/login(.:format)                                                        spree/admin/user_sessions#new
                          admin_create_new_session POST                      /admin/login(.:format)                                                        spree/admin/user_sessions#create
                                      admin_logout GET                       /admin/logout(.:format)                                                       spree/admin/user_sessions#destroy
+                                             root GET                       /                                                                             spree/home#index
+                                         products GET                       /products(.:format)                                                           spree/products#index
+                                          product GET                       /products/:id(.:format)                                                       spree/products#show
                                        locale_set GET                       /locale/set(.:format)                                                         spree/locale#set
                                   update_checkout PATCH                     /checkout/update/:state(.:format)                                             spree/checkout#update
                                    checkout_state GET                       /checkout/:state(.:format)                                                    spree/checkout#edit
                                          checkout GET                       /checkout(.:format)                                                           spree/checkout#edit
-                                  orders_populate GET                       /orders/populate(.:format)                                                    redirect(301)
+                                  orders_populate GET                       /orders/populate(.:format)                                                    spree/orders#populate_redirect
                                   populate_orders POST                      /orders/populate(.:format)                                                    spree/orders#populate
                                        edit_order GET                       /orders/:id/edit(.:format)                                                    spree/orders#edit
                                             order GET                       /orders/:id(.:format)                                                         spree/orders#show
@@ -114,10 +225,8 @@ Routes for Spree::Core::Engine:
                                     nested_taxons GET                       /t/*id(.:format)                                                              spree/taxons#show
                                      unauthorized GET                       /unauthorized(.:format)                                                       spree/home#unauthorized
                                               cvv GET                       /content/cvv(.:format)                                                        spree/content#cvv
-                                          content GET                       /content/*path(.:format)                                                      spree/content#show
+                                     content_test GET                       /content/test(.:format)                                                       spree/content#test
                                         cart_link GET                       /cart_link(.:format)                                                          spree/store#cart_link
-                               admin_search_users GET                       /admin/search/users(.:format)                                                 spree/admin/search#users
-                            admin_search_products GET                       /admin/search/products(.:format)                                              spree/admin/search#products
                   admin_promotion_promotion_rules GET                       /admin/promotions/:promotion_id/promotion_rules(.:format)                     spree/admin/promotion_rules#index
                                                   POST                      /admin/promotions/:promotion_id/promotion_rules(.:format)                     spree/admin/promotion_rules#create
                new_admin_promotion_promotion_rule GET                       /admin/promotions/:promotion_id/promotion_rules/new(.:format)                 spree/admin/promotion_rules#new
@@ -134,6 +243,7 @@ Routes for Spree::Core::Engine:
                                                   PATCH                     /admin/promotions/:promotion_id/promotion_actions/:id(.:format)               spree/admin/promotion_actions#update
                                                   PUT                       /admin/promotions/:promotion_id/promotion_actions/:id(.:format)               spree/admin/promotion_actions#update
                                                   DELETE                    /admin/promotions/:promotion_id/promotion_actions/:id(.:format)               spree/admin/promotion_actions#destroy
+                            clone_admin_promotion POST                      /admin/promotions/:id/clone(.:format)                                         spree/admin/promotions#clone
                                  admin_promotions GET                       /admin/promotions(.:format)                                                   spree/admin/promotions#index
                                                   POST                      /admin/promotions(.:format)                                                   spree/admin/promotions#create
                               new_admin_promotion GET                       /admin/promotions/new(.:format)                                               spree/admin/promotions#new
@@ -157,6 +267,15 @@ Routes for Spree::Core::Engine:
                                                   PATCH                     /admin/zones/:id(.:format)                                                    spree/admin/zones#update
                                                   PUT                       /admin/zones/:id(.:format)                                                    spree/admin/zones#update
                                                   DELETE                    /admin/zones/:id(.:format)                                                    spree/admin/zones#destroy
+                          set_default_admin_store POST                      /admin/stores/:id/set_default(.:format)                                       spree/admin/stores#set_default
+                                     admin_stores GET                       /admin/stores(.:format)                                                       spree/admin/stores#index
+                                                  POST                      /admin/stores(.:format)                                                       spree/admin/stores#create
+                                  new_admin_store GET                       /admin/stores/new(.:format)                                                   spree/admin/stores#new
+                                 edit_admin_store GET                       /admin/stores/:id/edit(.:format)                                              spree/admin/stores#edit
+                                      admin_store GET                       /admin/stores/:id(.:format)                                                   spree/admin/stores#show
+                                                  PATCH                     /admin/stores/:id(.:format)                                                   spree/admin/stores#update
+                                                  PUT                       /admin/stores/:id(.:format)                                                   spree/admin/stores#update
+                                                  DELETE                    /admin/stores/:id(.:format)                                                   spree/admin/stores#destroy
                              admin_country_states GET                       /admin/countries/:country_id/states(.:format)                                 spree/admin/states#index
                                                   POST                      /admin/countries/:country_id/states(.:format)                                 spree/admin/states#create
                           new_admin_country_state GET                       /admin/countries/:country_id/states/new(.:format)                             spree/admin/states#new
@@ -220,15 +339,14 @@ update_positions_admin_product_product_properties POST                      /adm
                                                   DELETE                    /admin/products/:product_id/variants/:id(.:format)                            spree/admin/variants#destroy
           admin_product_variants_including_master PATCH                     /admin/products/:product_id/variants_including_master/:id(.:format)           spree/admin/variants_including_master#update
                                                   PUT                       /admin/products/:product_id/variants_including_master/:id(.:format)           spree/admin/variants_including_master#update
-                                   admin_products GET                       /admin/products(.:format)                                                     spree/admin/products#index
+                                                  GET                       /admin/products(.:format)                                                     spree/admin/products#index
                                                   POST                      /admin/products(.:format)                                                     spree/admin/products#create
-                                new_admin_product GET                       /admin/products/new(.:format)                                                 spree/admin/products#new
-                               edit_admin_product GET                       /admin/products/:id/edit(.:format)                                            spree/admin/products#edit
-                                    admin_product GET                       /admin/products/:id(.:format)                                                 spree/admin/products#show
+                                                  GET                       /admin/products/new(.:format)                                                 spree/admin/products#new
+                                                  GET                       /admin/products/:id/edit(.:format)                                            spree/admin/products#edit
+                                                  GET                       /admin/products/:id(.:format)                                                 spree/admin/products#show
                                                   PATCH                     /admin/products/:id(.:format)                                                 spree/admin/products#update
                                                   PUT                       /admin/products/:id(.:format)                                                 spree/admin/products#update
                                                   DELETE                    /admin/products/:id(.:format)                                                 spree/admin/products#destroy
-                            admin_search_variants GET                       /admin/variants/search(.:format)                                              spree/admin/variants#search
               update_positions_admin_option_types POST                      /admin/option_types/update_positions(.:format)                                spree/admin/option_types#update_positions
        update_values_positions_admin_option_types POST                      /admin/option_types/update_values_positions(.:format)                         spree/admin/option_types#update_values_positions
                                admin_option_types GET                       /admin/option_types(.:format)                                                 spree/admin/option_types#index
@@ -267,14 +385,16 @@ update_positions_admin_product_product_properties POST                      /adm
                               approve_admin_order PUT                       /admin/orders/:id/approve(.:format)                                           spree/admin/orders#approve
                                cancel_admin_order PUT                       /admin/orders/:id/cancel(.:format)                                            spree/admin/orders#cancel
                                resume_admin_order PUT                       /admin/orders/:id/resume(.:format)                                            spree/admin/orders#resume
+                                store_admin_order GET                       /admin/orders/:id/store(.:format)                                             spree/admin/orders#store
+                            set_store_admin_order PUT                       /admin/orders/:id/set_store(.:format)                                         spree/admin/orders#set_store
                         admin_order_state_changes GET                       /admin/orders/:order_id/state_changes(.:format)                               spree/admin/state_changes#index
-                             admin_order_customer POST                      /admin/orders/:order_id/customer(.:format)                                    spree/admin/orders/customer_details#create
                          new_admin_order_customer GET                       /admin/orders/:order_id/customer/new(.:format)                                spree/admin/orders/customer_details#new
                         edit_admin_order_customer GET                       /admin/orders/:order_id/customer/edit(.:format)                               spree/admin/orders/customer_details#edit
-                                                  GET                       /admin/orders/:order_id/customer(.:format)                                    spree/admin/orders/customer_details#show
+                             admin_order_customer GET                       /admin/orders/:order_id/customer(.:format)                                    spree/admin/orders/customer_details#show
                                                   PATCH                     /admin/orders/:order_id/customer(.:format)                                    spree/admin/orders/customer_details#update
                                                   PUT                       /admin/orders/:order_id/customer(.:format)                                    spree/admin/orders/customer_details#update
                                                   DELETE                    /admin/orders/:order_id/customer(.:format)                                    spree/admin/orders/customer_details#destroy
+                                                  POST                      /admin/orders/:order_id/customer(.:format)                                    spree/admin/orders/customer_details#create
                refund_admin_order_customer_return PUT                       /admin/orders/:order_id/customer_returns/:id/refund(.:format)                 spree/admin/customer_returns#refund
                      admin_order_customer_returns GET                       /admin/orders/:order_id/customer_returns(.:format)                            spree/admin/customer_returns#index
                                                   POST                      /admin/orders/:order_id/customer_returns(.:format)                            spree/admin/customer_returns#create
@@ -338,13 +458,13 @@ update_positions_admin_product_product_properties POST                      /adm
                       admin_return_authorizations GET                       /admin/return_authorizations(.:format)                                        spree/admin/return_index#return_authorizations
                            admin_customer_returns GET                       /admin/customer_returns(.:format)                                             spree/admin/return_index#customer_returns
                clear_cache_admin_general_settings POST                      /admin/general_settings/clear_cache(.:format)                                 spree/admin/general_settings#clear_cache
-                           admin_general_settings POST                      /admin/general_settings(.:format)                                             spree/admin/general_settings#create
                        new_admin_general_settings GET                       /admin/general_settings/new(.:format)                                         spree/admin/general_settings#new
                       edit_admin_general_settings GET                       /admin/general_settings/edit(.:format)                                        spree/admin/general_settings#edit
-                                                  GET                       /admin/general_settings(.:format)                                             spree/admin/general_settings#show
+                           admin_general_settings GET                       /admin/general_settings(.:format)                                             spree/admin/general_settings#show
                                                   PATCH                     /admin/general_settings(.:format)                                             spree/admin/general_settings#update
                                                   PUT                       /admin/general_settings(.:format)                                             spree/admin/general_settings#update
                                                   DELETE                    /admin/general_settings(.:format)                                             spree/admin/general_settings#destroy
+                                                  POST                      /admin/general_settings(.:format)                                             spree/admin/general_settings#create
                                 admin_return_item PATCH                     /admin/return_items/:id(.:format)                                             spree/admin/return_items#update
                                                   PUT                       /admin/return_items/:id(.:format)                                             spree/admin/return_items#update
                 update_positions_admin_taxonomies POST                      /admin/taxonomies/update_positions(.:format)                                  spree/admin/taxonomies#update_positions
@@ -364,13 +484,19 @@ update_positions_admin_product_product_properties POST                      /adm
                                                   PATCH                     /admin/taxonomies/:id(.:format)                                               spree/admin/taxonomies#update
                                                   PUT                       /admin/taxonomies/:id(.:format)                                               spree/admin/taxonomies#update
                                                   DELETE                    /admin/taxonomies/:id(.:format)                                               spree/admin/taxonomies#destroy
-                              search_admin_taxons GET                       /admin/taxons/search(.:format)                                                spree/admin/taxons#search
                                      admin_taxons GET                       /admin/taxons(.:format)                                                       spree/admin/taxons#index
                                       admin_taxon GET                       /admin/taxons/:id(.:format)                                                   spree/admin/taxons#show
                         sales_total_admin_reports GET                       /admin/reports/sales_total(.:format)                                          spree/admin/reports#sales_total
                                                   POST                      /admin/reports/sales_total(.:format)                                          spree/admin/reports#sales_total
                                     admin_reports GET                       /admin/reports(.:format)                                                      spree/admin/reports#index
                         admin_reimbursement_types GET                       /admin/reimbursement_types(.:format)                                          spree/admin/reimbursement_types#index
+                                                  POST                      /admin/reimbursement_types(.:format)                                          spree/admin/reimbursement_types#create
+                     new_admin_reimbursement_type GET                       /admin/reimbursement_types/new(.:format)                                      spree/admin/reimbursement_types#new
+                    edit_admin_reimbursement_type GET                       /admin/reimbursement_types/:id/edit(.:format)                                 spree/admin/reimbursement_types#edit
+                         admin_reimbursement_type GET                       /admin/reimbursement_types/:id(.:format)                                      spree/admin/reimbursement_types#show
+                                                  PATCH                     /admin/reimbursement_types/:id(.:format)                                      spree/admin/reimbursement_types#update
+                                                  PUT                       /admin/reimbursement_types/:id(.:format)                                      spree/admin/reimbursement_types#update
+                                                  DELETE                    /admin/reimbursement_types/:id(.:format)                                      spree/admin/reimbursement_types#destroy
                              admin_refund_reasons GET                       /admin/refund_reasons(.:format)                                               spree/admin/refund_reasons#index
                                                   POST                      /admin/refund_reasons(.:format)                                               spree/admin/refund_reasons#create
                           new_admin_refund_reason GET                       /admin/refund_reasons/new(.:format)                                           spree/admin/refund_reasons#new
@@ -438,14 +564,6 @@ update_positions_admin_product_product_properties POST                      /adm
                                                   PATCH                     /admin/tax_rates/:id(.:format)                                                spree/admin/tax_rates#update
                                                   PUT                       /admin/tax_rates/:id(.:format)                                                spree/admin/tax_rates#update
                                                   DELETE                    /admin/tax_rates/:id(.:format)                                                spree/admin/tax_rates#destroy
-                                   admin_trackers GET                       /admin/trackers(.:format)                                                     spree/admin/trackers#index
-                                                  POST                      /admin/trackers(.:format)                                                     spree/admin/trackers#create
-                                new_admin_tracker GET                       /admin/trackers/new(.:format)                                                 spree/admin/trackers#new
-                               edit_admin_tracker GET                       /admin/trackers/:id/edit(.:format)                                            spree/admin/trackers#edit
-                                    admin_tracker GET                       /admin/trackers/:id(.:format)                                                 spree/admin/trackers#show
-                                                  PATCH                     /admin/trackers/:id(.:format)                                                 spree/admin/trackers#update
-                                                  PUT                       /admin/trackers/:id(.:format)                                                 spree/admin/trackers#update
-                                                  DELETE                    /admin/trackers/:id(.:format)                                                 spree/admin/trackers#destroy
            update_positions_admin_payment_methods POST                      /admin/payment_methods/update_positions(.:format)                             spree/admin/payment_methods#update_positions
                             admin_payment_methods GET                       /admin/payment_methods(.:format)                                              spree/admin/payment_methods#index
                                                   POST                      /admin/payment_methods(.:format)                                              spree/admin/payment_methods#create
@@ -455,11 +573,11 @@ update_positions_admin_product_product_properties POST                      /adm
                                                   PATCH                     /admin/payment_methods/:id(.:format)                                          spree/admin/payment_methods#update
                                                   PUT                       /admin/payment_methods/:id(.:format)                                          spree/admin/payment_methods#update
                                                   DELETE                    /admin/payment_methods/:id(.:format)                                          spree/admin/payment_methods#destroy
-                                      admin_roles GET                       /admin/roles(.:format)                                                        spree/admin/roles#index
+                                                  GET                       /admin/roles(.:format)                                                        spree/admin/roles#index
                                                   POST                      /admin/roles(.:format)                                                        spree/admin/roles#create
-                                   new_admin_role GET                       /admin/roles/new(.:format)                                                    spree/admin/roles#new
-                                  edit_admin_role GET                       /admin/roles/:id/edit(.:format)                                               spree/admin/roles#edit
-                                       admin_role GET                       /admin/roles/:id(.:format)                                                    spree/admin/roles#show
+                                                  GET                       /admin/roles/new(.:format)                                                    spree/admin/roles#new
+                                                  GET                       /admin/roles/:id/edit(.:format)                                               spree/admin/roles#edit
+                                                  GET                       /admin/roles/:id(.:format)                                                    spree/admin/roles#show
                                                   PATCH                     /admin/roles/:id(.:format)                                                    spree/admin/roles#update
                                                   PUT                       /admin/roles/:id(.:format)                                                    spree/admin/roles#update
                                                   DELETE                    /admin/roles/:id(.:format)                                                    spree/admin/roles#destroy
@@ -477,16 +595,18 @@ update_positions_admin_product_product_properties POST                      /adm
                                                   PATCH                     /admin/users/:user_id/store_credits/:id(.:format)                             spree/admin/store_credits#update
                                                   PUT                       /admin/users/:user_id/store_credits/:id(.:format)                             spree/admin/store_credits#update
                                                   DELETE                    /admin/users/:user_id/store_credits/:id(.:format)                             spree/admin/store_credits#destroy
-                                      admin_users GET                       /admin/users(.:format)                                                        spree/admin/users#index
+                                                  GET                       /admin/users(.:format)                                                        spree/admin/users#index
                                                   POST                      /admin/users(.:format)                                                        spree/admin/users#create
-                                   new_admin_user GET                       /admin/users/new(.:format)                                                    spree/admin/users#new
-                                  edit_admin_user GET                       /admin/users/:id/edit(.:format)                                               spree/admin/users#edit
-                                       admin_user GET                       /admin/users/:id(.:format)                                                    spree/admin/users#show
+                                                  GET                       /admin/users/new(.:format)                                                    spree/admin/users#new
+                                                  GET                       /admin/users/:id/edit(.:format)                                               spree/admin/users#edit
+                                                  GET                       /admin/users/:id(.:format)                                                    spree/admin/users#show
                                                   PATCH                     /admin/users/:id(.:format)                                                    spree/admin/users#update
                                                   PUT                       /admin/users/:id(.:format)                                                    spree/admin/users#update
                                                   DELETE                    /admin/users/:id(.:format)                                                    spree/admin/users#destroy
-                                            admin GET                       /admin(.:format)                                                              spree/admin/root#index
+                                            admin GET                       /admin(.:format)                                                              redirect(301, /admin/orders)
                                  api_v1_promotion GET                       /api/v1/promotions/:id(.:format)                                              spree/api/v1/promotions#show {:format=>"json"}
+                          api_v1_customer_returns GET                       /api/v1/customer_returns(.:format)                                            spree/api/v1/customer_returns#index {:format=>"json"}
+                            api_v1_reimbursements GET                       /api/v1/reimbursements(.:format)                                              spree/api/v1/reimbursements#index {:format=>"json"}
                             api_v1_product_images GET                       /api/v1/products/:product_id/images(.:format)                                 spree/api/v1/images#index {:format=>"json"}
                                                   POST                      /api/v1/products/:product_id/images(.:format)                                 spree/api/v1/images#create {:format=>"json"}
                          new_api_v1_product_image GET                       /api/v1/products/:product_id/images/new(.:format)                             spree/api/v1/images#new {:format=>"json"}
@@ -605,6 +725,7 @@ update_positions_admin_product_product_properties POST                      /adm
                                                   GET                       /api/v1/option_values(.:format)                                               spree/api/v1/option_values#index {:format=>"json"}
                                  api_v1_my_orders GET                       /api/v1/orders/mine(.:format)                                                 spree/api/v1/orders#mine {:format=>"json"}
                              api_v1_current_order GET                       /api/v1/orders/current(.:format)                                              spree/api/v1/orders#current {:format=>"json"}
+                  remove_coupon_code_api_v1_order PUT                       /api/v1/orders/:id/remove_coupon_code(.:format)                               spree/api/v1/orders#remove_coupon_code {:format=>"json"}
                              approve_api_v1_order PUT                       /api/v1/orders/:id/approve(.:format)                                          spree/api/v1/orders#approve {:format=>"json"}
                               cancel_api_v1_order PUT                       /api/v1/orders/:id/cancel(.:format)                                           spree/api/v1/orders#cancel {:format=>"json"}
                                empty_api_v1_order PUT                       /api/v1/orders/:id/empty(.:format)                                            spree/api/v1/orders#empty {:format=>"json"}
@@ -751,11 +872,10 @@ update_positions_admin_product_product_properties POST                      /adm
                                                   PATCH                     /api/v1/stores/:id(.:format)                                                  spree/api/v1/stores#update {:format=>"json"}
                                                   PUT                       /api/v1/stores/:id(.:format)                                                  spree/api/v1/stores#update {:format=>"json"}
                                                   DELETE                    /api/v1/stores/:id(.:format)                                                  spree/api/v1/stores#destroy {:format=>"json"}
+                                      api_v1_tags GET                       /api/v1/tags(.:format)                                                        spree/api/v1/tags#index {:format=>"json"}
                            api_v1_classifications PUT                       /api/v1/classifications(.:format)                                             spree/api/v1/classifications#update {:format=>"json"}
                             api_v1_taxon_products GET                       /api/v1/taxons/products(.:format)                                             spree/api/v1/taxons#products {:format=>"json"}
-                                              api GET|POST|PUT|PATCH|DELETE /api/v:api/*path(.:format)                                                    redirect(301, /api/v1/%{path}) {:format=>"json"}
+                                              api GET|POST|PUT|PATCH|DELETE /api/v:api/*path(.:format)                                                    redirect(301) {:format=>"json"}
                                                   GET|POST|PUT|PATCH|DELETE /api/*path(.:format)                                                          redirect(301) {:format=>"json"}
                                         forbidden GET                       /forbidden(.:format)                                                          spree/home#forbidden
-                                             root GET                       /                                                                             spree/home#index
-                                         products GET                       /products(.:format)                                                           spree/products#index
-                                          product GET                       /products/:id(.:format)                                                       spree/products#show
+                                                  GET                       /admin/invoice/:id(/:template)(.:format)                                      spree/admin/invoice#show
