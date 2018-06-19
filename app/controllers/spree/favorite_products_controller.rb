@@ -4,10 +4,12 @@ class Spree::FavoriteProductsController < BaseController
   before_action :check_authorization, except: [:index]
 
   def index
-    favorite_products = Spree::Product.favorite
-                                      .includes(master: :images)
-                                      .order('favorite_users_count asc')
-    respond_with(favorite_products)
+    @products = Spree::Product.favorite
+                              .includes(master: :images)
+                              .order('favorite_users_count asc')
+                              .page(params[:page])
+                              .per(params[:per_page])
+    respond_with(@products, template: 'spree/api/v1/products/index')
   end
 
   def create
@@ -22,7 +24,7 @@ class Spree::FavoriteProductsController < BaseController
   end
 
   def destroy
-    favorite =  spree_current_user.favorites.find_by(favoritable_id: params[:id])
+    favorite = spree_current_user.favorites.find_by(favoritable_id: params[:id])
     favorite.destroy
 
     render json: { message: t('favorite_products.destroy.success') }

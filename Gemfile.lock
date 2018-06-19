@@ -162,7 +162,6 @@ GEM
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
     builder (3.2.3)
-    byebug (10.0.2)
     camertron-eprun (1.1.1)
     cancancan (2.2.0)
     canonical-rails (0.2.3)
@@ -195,6 +194,7 @@ GEM
       terrapin (= 0.6.0)
     codeclimate-engine-rb (0.4.1)
       virtus (~> 1.0)
+    coderay (1.1.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.2.2)
@@ -339,6 +339,9 @@ GEM
     premailer-rails (1.10.2)
       actionmailer (>= 3, < 6)
       premailer (~> 1.7, >= 1.7.9)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     public_suffix (3.0.2)
     puma (3.11.4)
     rabl (0.13.1)
@@ -574,7 +577,6 @@ DEPENDENCIES
   activestorage-cloudinary-service
   aws-sdk-s3
   bootsnap (>= 1.1.0)
-  byebug
   capybara (>= 2.15, < 4.0)
   chromedriver-helper
   cloudinary
@@ -586,6 +588,7 @@ DEPENDENCIES
   listen (>= 3.0.5, < 3.2)
   oj
   pg (~> 0.18)
+  pry
   puma (~> 3.11)
   rack-cors
   rails (~> 5.2.0)
