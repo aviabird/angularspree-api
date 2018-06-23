@@ -1,18 +1,37 @@
+data_set = params[:data_set] || 'small'
+
 cache [I18n.locale, @current_user_roles.include?('admin'), 'small_variant', root_object]
 
-attributes *variant_attributes
+node(:attributes) { |v|
+  partial 'spree/api/v1/variants/small_attrs', object: v
+}
 
-node(:display_price) { |p| p.display_price.to_s }
-node(:options_text, &:options_text)
-node(:track_inventory, &:should_track_inventory?)
-node(:in_stock, &:in_stock?)
-node(:is_backorderable, &:is_backorderable?)
-node(:is_orderable) { |v| v.is_backorderable? || v.in_stock? }
-node(:total_on_hand, &:total_on_hand)
-node(:is_destroyed, &:destroyed?)
-
-child option_values: :option_values do
-  attributes *option_value_attributes
+node(:relationships) do |vr|
+  {
+    option_values: {
+      data: vr.option_values.map { |ov| { type: 'option_values', id: ov.id } }
+    },
+    images: {
+      data: vr.images.map { |im| {type: 'images', id: im.id} }
+    }
+  }
 end
 
-child(images: :images) { extends 'spree/api/v1/images/show' }
+node :included do |vr|
+  {
+    option_values: vr.option_values.map { |im|
+      {
+        data: {
+          attributes: partial('spree/api/v1/variants/option_value', object: im)
+        }
+      }
+    },
+    images: vr.images.map { |im|
+      {
+        data: {
+          attributes: partial('spree/api/v1/images/show', object: im)
+        }
+      }
+    }
+  }
+end

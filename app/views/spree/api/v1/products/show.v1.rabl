@@ -17,15 +17,48 @@ if data_set.eql?('large')
   node(:relationships) do |pr|
     {
       master: { data: { type: 'master', id: pr.master.id } },
-      variants: { data: pr.variants.map { |vr| { type: 'variants', id: vr.id } } }
+      variants: {
+        data: pr.variants.map { |vr| { type: 'variants', id: vr.id } }
+      },
+      option_types: {
+        data: pr.option_types.map { |ot| { type: 'option_types', id: ot.id } }
+      },
+      product_properties: {
+        data: pr.product_properties.map { |pp| { type: 'product_properties', id: pp.id } }
+      },
+      classifications: {
+        data: pr.classifications.map { |cl| { type: 'classifications', id: cl.id } }
+      }
     }
   end
 
   node :included do |pr|
     {
-      master: partial('spree/api/v1/variants/small', object: pr.master),
-      variants: pr.variants.map { |v| partial('spree/api/v1/variants/small', object: v) }
+      master: { data: partial('spree/api/v1/variants/small', object: pr.master) },
+      variants: pr.variants.map { |v|
+        { data: partial('spree/api/v1/variants/small', object: v) }
+      },
+      option_types: pr.option_types.map { |ot|
+        {
+          data: {
+            attributes: partial('spree/api/v1/products/option_type', object: ot)
+          }
+        }
+      },
+      product_properties: pr.product_properties.map { |pp|
+        {
+          data: {
+            attributes: partial('spree/api/v1/products/product_property', object: pp)
+          }
+        }
+      },
+      classifications: pr.classifications.map { |cl|
+        {
+          data: {
+            attributes: partial('spree/api/v1/products/classification', object: cl)
+          }
+        }
+      }
     }
   end
-
 end
