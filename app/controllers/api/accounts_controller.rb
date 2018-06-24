@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::AccountsController < BaseController
-  before_action :check_authorization, except: %i[create]
+  before_action :check_authorization, except: %i[handle_payment]
 
   def serialization_scope
     current_order
@@ -44,6 +44,13 @@ class Api::AccountsController < BaseController
 
   def authenticated
     render_user
+  end
+
+  def handle_payment
+    # For now just redirected with order_id
+    order_id = params[:txnid]
+    url = "http://localhost:4200/checkout/order-success?orderReferance=#{order_id}"
+    redirect_to url
   end
 
   private
