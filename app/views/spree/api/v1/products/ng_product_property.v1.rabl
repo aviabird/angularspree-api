@@ -1,0 +1,1 @@
+attributes(*product_property_attributes)
