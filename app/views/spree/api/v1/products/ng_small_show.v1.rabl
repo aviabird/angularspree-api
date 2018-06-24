@@ -6,4 +6,6 @@ node(:product_url) do |p|
   image && main_app.url_for(image.url(:product))
 end
 
-node(:display_price) { |p| p.display_price.to_s }
+node(:price) { |p| p.price }
+node(:cost_price) { |p| p.master.cost_price.to_s }
+node(:currency) { Money::Currency.table[current_currency.underscore.to_sym][:symbol] }
