@@ -31,10 +31,10 @@ class Spree::FavoriteProductsController < BaseController
   end
 
   def user_favorite_products
-    favorite_products = spree_current_user
+    @products = spree_current_user
                         .favorite_products
                         .page(params[:page])
                         .per(Spree::Config.favorite_products_per_page)
-    respond_with(favorite_products)
+    respond_with(@products, template: 'spree/api/v1/products/index')
   end
 end

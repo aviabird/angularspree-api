@@ -8,8 +8,10 @@ module Spree
 
       def index
         @product = Spree::Product.friendly.find(params[:product_id])
-        related_products = Product.find(@product.relations.pluck(:related_to_id))
-        render json: related_products
+        @products = Product.where(id: @product.relations.pluck(:related_to_id))
+                                  .page(params[:page])
+                                  .per(params[:per_page])
+        respond_with(@products, template: 'spree/api/v1/products/index')
       end
 
       def create
