@@ -1,64 +1,36 @@
-# frozen_string_literal: true
-
-object @product => :data
-
-data_set = params[:data_set] || 'small'
-
-cache [I18n.locale, @current_user_roles.include?('admin'), current_currency, root_object]
-
-attribute(:id)
-node(:type) { 'products' }
-
-node(:attributes) do |p|
-  partial "spree/api/v1/products/#{data_set}_show", object: p
-end
-
-if data_set.eql?('large')
-  node(:relationships) do |pr|
-    {
-      master: { data: { type: 'master', id: pr.master.id } },
-      variants: {
-        data: pr.variants.map { |vr| { type: 'variants', id: vr.id } }
-      },
-      option_types: {
-        data: pr.option_types.map { |ot| { type: 'option_types', id: ot.id } }
-      },
-      product_properties: {
-        data: pr.product_properties.map { |pp| { type: 'product_properties', id: pp.id } }
-      },
-      classifications: {
-        data: pr.classifications.map { |cl| { type: 'classifications', id: cl.id } }
-      }
-    }
+if request.headers['ng-api'] == 'true'
+  object @product => :data
+  extends 'spree/api/v1/products/ng_show'
+else
+  object @product
+  cache [I18n.locale, @current_user_roles.include?('admin'), current_currency, root_object]
+  attributes *product_attributes
+  
+  node(:display_price) { |p| p.display_price.to_s }
+  node(:has_variants, &:has_variants?)
+  node(:taxon_ids, &:taxon_ids)
+  
+  child master: :master do
+    extends 'spree/api/v1/variants/small'
   end
-
-  node :included do |pr|
-    {
-      master: { data: partial('spree/api/v1/variants/small', object: pr.master) },
-      variants: pr.variants.map { |v|
-        { data: partial('spree/api/v1/variants/small', object: v) }
-      },
-      option_types: pr.option_types.map { |ot|
-        {
-          data: {
-            attributes: partial('spree/api/v1/products/option_type', object: ot)
-          }
-        }
-      },
-      product_properties: pr.product_properties.map { |pp|
-        {
-          data: {
-            attributes: partial('spree/api/v1/products/product_property', object: pp)
-          }
-        }
-      },
-      classifications: pr.classifications.map { |cl|
-        {
-          data: {
-            attributes: partial('spree/api/v1/products/classification', object: cl)
-          }
-        }
-      }
-    }
+  
+  child variants: :variants do
+    extends 'spree/api/v1/variants/small'
+  end
+  
+  child option_types: :option_types do
+    attributes *option_type_attributes
+  end
+  
+  child product_properties: :product_properties do
+    attributes *product_property_attributes
+  end
+  
+  child classifications: :classifications do
+    attributes :taxon_id, :position
+  
+    child(:taxon) do
+      extends 'spree/api/v1/taxons/show'
+    end
   end
 end

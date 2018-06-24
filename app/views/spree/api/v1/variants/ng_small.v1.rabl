@@ -3,7 +3,7 @@ data_set = params[:data_set] || 'small'
 cache [I18n.locale, @current_user_roles.include?('admin'), 'small_variant', root_object]
 
 node(:attributes) { |v|
-  partial 'spree/api/v1/variants/small_attrs', object: v
+  partial 'spree/api/v1/variants/ng_small_attrs', object: v
 }
 
 node(:relationships) do |vr|
@@ -22,7 +22,7 @@ node :included do |vr|
     option_values: vr.option_values.map { |im|
       {
         data: {
-          attributes: partial('spree/api/v1/variants/option_value', object: im)
+          attributes: partial('spree/api/v1/variants/ng_option_value', object: im)
         }
       }
     },

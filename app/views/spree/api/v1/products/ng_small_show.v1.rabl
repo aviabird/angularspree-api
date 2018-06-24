@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-attributes(:slug)
+attributes(:slug, :name)
 
 node(:product_url) do |p|
   image = p.master.images.first
