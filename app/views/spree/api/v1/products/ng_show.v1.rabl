@@ -4,7 +4,7 @@ object @product => :data
 
 data_set = params[:data_set] || 'small'
 
-cache [I18n.locale, @current_user_roles.include?('admin'), current_currency, root_object, 'ng-api', data_set]
+# cache [I18n.locale, @current_user_roles.include?('admin'), current_currency, root_object, 'ng-api']
 
 attribute(:id)
 node(:type) { 'products' }

@@ -13,4 +13,3 @@ end
 child(@products => :data) do
   extends 'spree/api/v1/products/ng_show'
 end
-

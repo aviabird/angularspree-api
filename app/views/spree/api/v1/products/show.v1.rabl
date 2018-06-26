@@ -1,6 +1,6 @@
 if request.headers['ng-api'] == 'true'
   object @product => :data
-  extends 'spree/api/v1/products/ng_show'
+  extends 'spree/api/v1/products/ng_show', root: :data
 else
   object @product
   cache [I18n.locale, @current_user_roles.include?('admin'), current_currency, root_object, 'spree-api']
