@@ -34,6 +34,8 @@ Rails.application.routes.draw do
 
   scope module: 'api', path: 'auth', defaults: { format: :json } do
     get 'authenticated', to: 'accounts#authenticated'
+    post 'handle_payment', to: 'accounts#handle_payment'
+    post 'canceled_payment', to: 'accounts#canceled_payment'
     resources :accounts
     resources :passwords
   end
