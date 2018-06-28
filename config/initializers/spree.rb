@@ -15,7 +15,9 @@ Spree.config do |config|
   # Example:
   # Uncomment to stop tracking inventory levels in the application
   # config.track_inventory_levels = false
+
 end
 
 Spree.user_class = 'Spree::User'
 Spree::Api::Config[:requires_authentication] = false
+Rails.application.config.spree.payment_methods << Spree::PaymentMethod::Payubiz
