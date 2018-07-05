@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class Spree::ReviewsController < Spree::StoreController
   helper Spree::BaseHelper
   before_action :load_product, only: %i[index new create]
@@ -20,18 +19,15 @@ class Spree::ReviewsController < Spree::StoreController
 
   def new
     @review = Spree::Review.new(product: @product)
-    authorize! :create, @review
   end
 
   def create
     params[:review][:rating].sub!(/\s*[^0-9]*\z/, '') unless params[:review][:rating].blank?
-
     @review = Spree::Review.new(review_params)
     @review.product = @product
-    @review.user = spree_current_user if spree_user_signed_in?
+    @review.user = Spree::User.find_by(id: params[:review][:user_id])
     @review.ip_address = request.remote_ip
     @review.locale = I18n.locale.to_s if Spree::Reviews::Config[:track_locale]
-    authorize! :create, @review
     if @review.save
       message = Spree.t(:review_successfully_submitted)
       render json: { message: message }
@@ -60,10 +56,12 @@ class Spree::ReviewsController < Spree::StoreController
     ratings_array.each do |rate|
       counts[rate] += 1
     end
+    
 
     @rating_summery = []
-    counts.each do |key, value|
-      @rating_summery << { key => value, 'percentage' => (value.to_f / ratings_array.count * 100) }
+    x = counts.sort_by {|k,v| k}.reverse
+    x.each do |key, value|
+      @rating_summery << { 'rating'=> key, 'count'=>value, 'percentage' => (value.to_f / ratings_array.count * 100) }
     end
 
     @rating_summery
