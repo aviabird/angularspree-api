@@ -75,14 +75,8 @@ class Spree::ReviewsController < Spree::StoreController
   end
 
   def is_already_reviewed(product_reviews)
-    product_reviews.each do |review|
-      if (review.user_id == params[:review][:user_id])
-        return true
-        break
-      else
-        return false
-      end
-    end
+    user_id = params[:review][:user_id]
+    product_reviews.find { |r| r.user_id == user_id } ? true : false
   end   
 
 end
