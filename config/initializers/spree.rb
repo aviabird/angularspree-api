@@ -21,3 +21,4 @@ end
 Spree.user_class = 'Spree::User'
 Spree::Api::Config[:requires_authentication] = false
 Rails.application.config.spree.payment_methods << Spree::PaymentMethod::Payubiz
+Rails.application.config.spree.payment_methods << Spree::PaymentMethod::Cod
