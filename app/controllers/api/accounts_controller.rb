@@ -47,12 +47,13 @@ class Api::AccountsController < BaseController
   end
 
   def handle_payment
-    order_id = params[:txnid]
+    transaction_id = params[:txnid]
     mihpayid = params[:mihpayid]
+    order_id = transaction_id.slice(0..9)
     @current_order = Spree::Order.find_by_number(order_id)
     #Assuming that we do not having partial payments(one stroke payment only)
     result = @current_order.payments.first.complete
-    if result
+    if result && params[:status] == "success"
       @current_order.payments.first.update(response_code: mihpayid)
       url = "#{ENV['FRONT_END_URL']}checkout/order-success?orderReferance=#{order_id}"  
       redirect_to url  
