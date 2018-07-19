@@ -34,10 +34,19 @@ Rails.application.routes.draw do
 
   scope module: 'api', path: 'auth', defaults: { format: :json } do
     get 'authenticated', to: 'accounts#authenticated'
-    post 'handle_payment', to: 'accounts#handle_payment'
-    post 'canceled_payment', to: 'accounts#canceled_payment'
     resources :accounts
     resources :passwords
+  end
+
+  scope module: 'api', path: 'address', defaults: {format: :json} do
+    post 'shipment_availability', to: 'addresses#shipment_availability'
+    resources :addresses
+  end
+
+  scope module: 'api', path: 'payubiz', defaults: {format: :json} do
+    post 'handle_payment', to: 'payubiz#handle_payment'
+    post 'canceled_payment', to: 'payubiz#canceled_payment'
+    resources :payubiz
   end
 
   post 'auth/:provider', to: 'oauth#create'
