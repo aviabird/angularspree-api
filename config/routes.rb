@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   scope module: 'api', path: 'payubiz', defaults: {format: :json} do
     post 'handle_payment', to: 'payubiz#handle_payment'
     post 'canceled_payment', to: 'payubiz#canceled_payment'
+    post 'post_request_payubiz', to: 'payubiz#post_request_payubiz'
     resources :payubiz
   end
 
