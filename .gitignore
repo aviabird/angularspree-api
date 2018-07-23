@@ -37,3 +37,5 @@
 /config/master.key
 .env.example
 .env.example
+public/uploads/.~lock.shipment_pincodes.csv#
+public/uploads/.DS_Store

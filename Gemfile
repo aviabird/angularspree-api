@@ -102,3 +102,5 @@ gem "aws-sdk-s3", require: false
 
 gem 'cloudinary', require: false
 gem 'activestorage-cloudinary-service'
+
+gem 'activerecord-import'
