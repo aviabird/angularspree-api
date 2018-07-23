@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::AccountsController < BaseController
-  before_action :check_authorization, except: %i[handle_payment canceled_payment]
+  before_action :check_authorization, except: %i[handle_payment]
 
   def serialization_scope
     current_order
@@ -46,25 +46,6 @@ class Api::AccountsController < BaseController
     render_user
   end
 
-  def handle_payment
-    transaction_id = params[:txnid]
-    mihpayid = params[:mihpayid]
-    order_id = transaction_id.slice(0..9)
-    @current_order = Spree::Order.find_by_number(order_id)
-    #Assuming that we do not having partial payments(one stroke payment only)
-    result = @current_order.payments.first.complete
-    if result && params[:status] == "success"
-      @current_order.payments.first.update(response_code: mihpayid)
-      url = "#{ENV['FRONT_END_URL']}checkout/order-success?orderReferance=#{order_id}"  
-      redirect_to url  
-    end
-  end
-
-  def canceled_payment
-    #WIP when user cancel payments
-    url = "#{ENV['FRONT_END_URL']}"
-      redirect_to url  
-  end
 
   private
 
@@ -75,7 +56,7 @@ class Api::AccountsController < BaseController
   def render_user
     serializer = params[:serializer] == 'full' ? UserSerializer : LiteUserSerializer
 
-    if @user.present?
+    if @user.present? && @user.spree_api_key
       render json: @user,
              root: false,
              scope: @user,

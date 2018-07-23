@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_15_105321) do
+ActiveRecord::Schema.define(version: 2018_07_19_070622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,12 @@ ActiveRecord::Schema.define(version: 2018_06_15_105321) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["type"], name: "index_ckeditor_assets_on_type"
+  end
+
+  create_table "delivery_pincodes", force: :cascade do |t|
+    t.string "pincode"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
