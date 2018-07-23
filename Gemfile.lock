@@ -42,6 +42,17 @@ GIT
       spree_extension
 
 GIT
+  remote: https://github.com/spree/spree_auth_devise.git
+  revision: f155d176565f7a669ec2288c2ed61cb29d8e50a3
+  branch: master
+  specs:
+    spree_auth_devise (3.3.3)
+      devise (~> 4.4.0)
+      devise-encryptable (= 0.2.0)
+      spree_core (>= 3.1.0, < 4.0)
+      spree_extension
+
+GIT
   remote: https://github.com/vinsol-spree-contrib/spree-html-invoice.git
   revision: 3f6f9eb69d8d1c5b5f48210d4b8d15e8b9c18df4
   branch: master
@@ -99,7 +110,7 @@ GEM
     activejob (5.2.0)
       activesupport (= 5.2.0)
       globalid (>= 0.3.6)
-    activemerchant (1.79.2)
+    activemerchant (1.80.0)
       activesupport (>= 4.2, < 6.x)
       builder (>= 2.1.2, < 4.0.0)
       i18n (>= 0.6.9)
@@ -313,7 +324,7 @@ GEM
     multi_json (1.13.1)
     netrc (0.11.0)
     nio4r (2.3.1)
-    nokogiri (1.8.3)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
     oj (3.6.2)
     orm_adapter (0.5.0)
@@ -350,7 +361,7 @@ GEM
       activesupport (>= 2.3.14)
     rack (2.0.5)
     rack-cors (1.0.2)
-    rack-test (1.0.0)
+    rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.0)
       actioncable (= 5.2.0)
@@ -454,11 +465,6 @@ GEM
       rabl (~> 0.13.1)
       spree_core (= 3.6.1)
       versioncake (~> 3.4.0)
-    spree_auth_devise (3.3.3)
-      devise (~> 4.4.0)
-      devise-encryptable (= 0.2.0)
-      spree_core (>= 3.1.0, < 4.0)
-      spree_extension
     spree_backend (3.6.1)
       bootstrap-sass (~> 3.3)
       jquery-rails (~> 4.3)
@@ -602,7 +608,7 @@ DEPENDENCIES
   selenium-webdriver
   spree (~> 3.6.0)
   spree_admin_roles_and_access!
-  spree_auth_devise (~> 3.3)
+  spree_auth_devise!
   spree_editor!
   spree_favorite_products!
   spree_gateway (~> 3.3)
