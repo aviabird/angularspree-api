@@ -71,7 +71,7 @@ gem 'active_model_serializers'
 gem 'dotenv-rails'
 gem 'httpclient'
 gem 'spree', '~> 3.6.0'
-gem 'spree_auth_devise', '~> 3.3'
+gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'master'
 gem 'spree_gateway', '~> 3.3'
 
 # Spree Extensions
