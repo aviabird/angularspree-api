@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::AccountsController < BaseController
-  before_action :check_authorization, except: %i[handle_payment]
+  before_action :check_authorization, except: %i[create]
 
   def serialization_scope
     current_order
