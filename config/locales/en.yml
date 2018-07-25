@@ -1,35 +1,29 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
+# Add your custom information.
 en:
-  favorite_products:
-    destroy: 
-      success: "Product has been successfully removed from favorite"
+  spree:
+    footer_right: "Website <br/> Phone"
+    footer_right2: "www.ofypets.com <br/>917-6031-568"
+
+    size: "Size"
+    price: "Price"
+    order_date: "Order date"
+    ship_adjustment: "Shipping Adjustments"
+    shipment_amount: "Shipping Amount"
+    state: "State"
+    method: "Method"
+    amount: "Amount"
+    invoice:
+      header: Customer Invoice
+      thanks: Thank you for your order.
+      print: Print Invoice
+    packaging_slip:
+      header: Packaging Slip
+      print: Print Slip
+      thanks: Please check the contents immediately.
+    reminder:
+      header: Payment Reminder
+      print: Reminder
+      thanks: Our system has not registered any payment for this Invoice. We kindly request you correct this situation.
+    receipt:
+      header: Receipt
+      print: Receipt
