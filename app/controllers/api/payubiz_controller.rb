@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-
 class Api::PayubizController < BaseController
-  before_action :check_authorization, except: %i[handle_payment canceled_payment post_request_payubiz]
+  before_action :check_authorization, except: %i[handle_payment canceled_payment]
+  skip_before_action :verify_authenticity_token, only: %i[canceled_payment]
 
   def handle_payment
     transaction_id = params[:txnid]
@@ -21,9 +21,10 @@ class Api::PayubizController < BaseController
   end
 
   def canceled_payment
-    #WIP when user cancel payments
-    url = "#{ENV['FRONT_END_URL']}"
-      redirect_to url  
+    reason = params[:error_Message]
+    order_id=params[:udf1]
+    url = "#{ENV['FRONT_END_URL']}checkout/order-failed?orderReferance=#{order_id}&reason=#{reason}"  
+    redirect_to url  
   end
 
   def post_request_payubiz
