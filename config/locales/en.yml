@@ -2,8 +2,7 @@
 en:
   spree:
     footer_right: "Website <br/> Phone"
-    footer_right2: "www.ofypets.com <br/>917-6031-568"
-
+    footer_right2: "localhost:4200 <br/> 1234567890"
     size: "Size"
     price: "Price"
     order_date: "Order date"
@@ -27,3 +26,6 @@ en:
     receipt:
       header: Receipt
       print: Receipt
+    favorite_products:
+      destroy:
+        success: "Product has been successfully removed from favorite"
