@@ -10,21 +10,7 @@ class OauthUserCreator
 
   def call
     identity = Identity.find_or_initialize_by(uid: info.uid, provider: info.provider)
-    if @current_user
-      if identity.user == @current_user
-        # User is signed in so they are trying to link an identity with their
-        # account. But we found the identity and the user associated with it
-        # is the current user. So the identity is already associated with
-        # this user. So let's display an error message.
-        return nil
-      else
-        # The identity is not associated with the current_user so lets
-        # associate the identity
-        identity.user = @current_user
-        identity.save!
-        return identity.user
-      end
-    else
+    identity.user.generate_spree_api_key! if identity.user&.spree_api_key?
       if identity.user.present?
         # The identity we found had a user associated with it
         return identity.user
@@ -42,7 +28,6 @@ class OauthUserCreator
           return nil
         end
       end
-    end
   end
 
   private
@@ -58,7 +43,7 @@ class OauthUserCreator
         return user
       end
     else
-      user
+      return user
     end
   end
 end

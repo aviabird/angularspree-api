@@ -20,6 +20,9 @@ class Spree::UserSessionsController < Devise::SessionsController
   def create
     # Warden authentication
     self.resource = warden.authenticate!(auth_options)
+    # Check for spree api key
+    @spree_user.generate_spree_api_key! unless @spree_user.spree_api_key?
+
     if spree_user_signed_in?
       respond_to do |format|
         format.html do
