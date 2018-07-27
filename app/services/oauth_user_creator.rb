@@ -23,6 +23,7 @@ class OauthUserCreator
           @user.generate_spree_api_key! unless @user.spree_api_key?
           identity.user = @user
           identity.save!
+          UserMailer.user_registration_instructions(@user).deliver
           return @user
         else
           return nil

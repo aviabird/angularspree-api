@@ -15,7 +15,7 @@ class Api::AccountsController < BaseController
       sign_in(:spree_user, @user)
       @order.update(user: @user) if @order && !@order.user
       @user.generate_spree_api_key!
-
+      UserMailer.user_registration_instructions(@user).deliver
       render_user
     else
       invalid_resource!(@user)
