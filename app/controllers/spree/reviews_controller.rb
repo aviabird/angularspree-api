@@ -64,11 +64,14 @@ class Spree::ReviewsController < Spree::StoreController
     ratings_array.each do |rate|
       counts[rate] += 1
     end
-    
+
+    for i in 1..5
+      counts.merge!(i => 0) if counts[i]==0 
+    end
 
     @rating_summery = []
-    x = counts.sort_by {|k,v| k}.reverse
-    x.each do |key, value|
+    sorted_counts = counts.sort_by {|k,v| k}.reverse
+    sorted_counts.each do |key, value|
       @rating_summery << { 'rating'=> key, 'count'=>value, 'percentage' => (value.to_f / ratings_array.count * 100) }
     end
     @rating_summery
