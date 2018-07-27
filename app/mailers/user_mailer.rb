@@ -5,4 +5,9 @@ class UserMailer < ActionMailer::Base
     @token =token
     mail(to: @user.email, subject: 'Reset Password Instructions')
   end
+
+  def user_registration_instructions(user)
+    @user = user
+    mail(to: @user.email, subject: "Welcome to #{ENV['APP_NAME']}")
+  end
 end
