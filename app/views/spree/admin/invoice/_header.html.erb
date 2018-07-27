@@ -1,0 +1,11 @@
+<table>
+  <tr>
+    <td width="345"><%= image_tag Spree::HtmlInvoice::Config[:html_invoice_logo_path] || "store/invoice_logo.jpg", id: "logo",style: 'height:80%;width:auto;' %></td>
+    <td width="345">
+    <div align="right">
+      <p class="title"><%= Spree.t("#{params[:template]}.header") %></p>
+      <p class="bold"><%= Spree.t(:order_number, number: @order.number)  %></p>
+      <p class="bold"> <%=Spree.t(:order_date) %>: <%= Spree.l(@order.completed_at.to_date) if @order.completed_at %></p>
+    </div></td>
+  </tr>
+</table>
