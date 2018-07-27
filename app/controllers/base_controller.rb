@@ -51,6 +51,7 @@ class BaseController < Spree::BaseController
 
   def set_current_user
     token = request.headers['Auth-Token']
+    return if token.blank?
     @spree_current_user = Spree::User.find_by_spree_api_key(token)
   end
 
