@@ -22,4 +22,4 @@ Spree.user_class = 'Spree::User'
 Spree::Api::Config[:requires_authentication] = false
 Rails.application.config.spree.payment_methods << Spree::PaymentMethod::Payubiz
 Rails.application.config.spree.payment_methods << Spree::PaymentMethod::Cod
-Spree::Product.whitelisted_ransackable_attributes.push('avg_rating', 'reviews_count', 'favorite_users_count', 'amount')
+Spree::Product.whitelisted_ransackable_attributes.push('avg_rating', 'reviews_count', 'favorite_users_count')
