@@ -84,6 +84,9 @@ gem 'spree_mail_settings', github: 'spree-contrib/spree_mail_settings'
 gem 'spree_recently_viewed', github: 'spree-contrib/spree_recently_viewed'
 gem 'spree_related_products', github: 'spree-contrib/spree_related_products'
 gem 'spree_reviews', github: 'spree-contrib/spree_reviews'
+gem 'spree_events_tracker', github: 'vinsol-spree-contrib/spree_events_tracker', branch: 'master'
+gem 'spree_admin_insights', git: 'https://github.com/vinsol-spree-contrib/spree-admin-insights', branch: 'master'
+gem 'spree_analytics_trackers', github: 'spree-contrib/spree_analytics_trackers'
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 

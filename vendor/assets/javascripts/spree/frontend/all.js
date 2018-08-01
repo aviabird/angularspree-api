@@ -18,3 +18,6 @@
 //= require spree/frontend/spree_admin_roles_and_access
 //= require spree/frontend/spree_recently_viewed
 //= require spree/frontend/spree_reviews
+//= require spree/frontend/spree_events_tracker
+//= require spree/frontend/spree_admin_insights
+//= require spree/frontend/spree_analytics_trackers
