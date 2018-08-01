@@ -15,3 +15,4 @@
 //= require spree/backend/spree_reviews
 //= require spree/backend/spree_events_tracker
 //= require spree/backend/spree_admin_insights
+//= require spree/backend/spree_analytics_trackers
