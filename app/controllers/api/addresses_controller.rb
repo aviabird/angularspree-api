@@ -24,11 +24,12 @@ class Api::AddressesController < BaseController
 
   def update_address 
     if params[:user][:email].blank?
-      render json: { errors: 'Address can not be update' }, status: 422
+      render json: { errors: 'Address can not be updated' }, status: 422
     else
       user= Spree::User.find_by!(email: params[:user][:email])
       hashParams = (params[:user][:ship_address].to_unsafe_h)
-      updated = user.ship_address.update(hashParams)      
+      user.ship_address.update(hashParams)
+      updated = user.save!      
       render json: {status: "Address updated Successfully!"} if updated
     end 
   end
@@ -39,8 +40,8 @@ class Api::AddressesController < BaseController
     else
       user= Spree::User.find_by!(email: params[:user][:email])
       hashParams = (params[:user][:ship_address].to_unsafe_h)
-      updated = user.create_ship_address(hashParams)
-      user.save      
+      user.create_ship_address(hashParams)
+      updated = user.save!      
       render json: {status: "Address added Successfully!"} if updated
     end 
   end
