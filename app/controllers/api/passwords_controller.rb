@@ -13,9 +13,11 @@ class Api::PasswordsController < BaseController
       user = Spree::User.new
       user.errors[:password] = 'Cannot be blank'
     else
-      user = Spree::User.reset_password_by_token(params[:spree_user])
+      user= Spree::User.find_by!(email: params[:spree_user][:email])
+      params.require(:spree_user).permit(:password)
+      updated = user.update_attributes(:password => params[:spree_user][:password])
       sign_in :spree_user, user if user.errors.empty?
+      render json: {status: "Password changed Successfully!"} if updated
     end
-    respond_with user
   end
 end
