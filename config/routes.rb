@@ -35,11 +35,14 @@ Rails.application.routes.draw do
   scope module: 'api', path: 'auth', defaults: { format: :json } do
     get 'authenticated', to: 'accounts#authenticated'
     resources :accounts
+    put 'change_password', to: 'passwords#update'
     resources :passwords
   end
 
   scope module: 'api', path: 'address', defaults: {format: :json} do
     post 'shipment_availability', to: 'addresses#shipment_availability'
+    post  'update_address', to: 'addresses#update_address'
+    post 'create_address', to: 'addresses#create_address'
     resources :addresses
   end
 
