@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class Api::PayubizController < BaseController
   before_action :check_authorization, except: %i[handle_payment canceled_payment]
-  skip_before_action :verify_authenticity_token, only: %i[canceled_payment]
+  skip_before_action :verify_authenticity_token, only: %i[canceled_payment handle_payment]
 
   def handle_payment
     transaction_id = params[:txnid]
@@ -30,13 +30,13 @@ class Api::PayubizController < BaseController
   def post_request_payubiz
     require "uri"
     require "net/http"
-    payuBizUrl= "#{ENV['PAYUBIZ_TEST_URL']}"
+    payuBizUrl= "#{ENV['PAYUBIZ_URL']}"
     payu = params[:params]
     payu_params = {'key'=>payu[:key],'txnid'=>payu[:txnid],
       'amount'=>payu[:amount],'productinfo'=>payu[:productinfo], 'firstname'=>payu[:firstname], 
       'email'=>payu[:email], 'phone'=>payu[:phone],'udf1'=>payu[:udf1],
       'surl'=>payu[:surl], 'furl'=>payu[:furl], 'hash'=>payu[:hash]}
-      
+        
     begin
       response = Net::HTTP.post_form URI(payuBizUrl),payu_params
       render json: {url: response['location']}
