@@ -39,3 +39,8 @@
 .env.example
 public/uploads/.~lock.shipment_pincodes.csv#
 public/uploads/.DS_Store
+.DS_Store
+app/.DS_Store
+app/assets/.DS_Store
+public/.DS_Store
+lib/.DS_Store
