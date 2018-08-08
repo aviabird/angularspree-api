@@ -26,6 +26,6 @@ en:
     receipt:
       header: Receipt
       print: Receipt
-    favorite_products:
-      destroy:
-        success: "Product has been successfully removed from favorite"
+  favorite_products:
+    destroy:
+      success: "Product has been successfully removed from favorite"

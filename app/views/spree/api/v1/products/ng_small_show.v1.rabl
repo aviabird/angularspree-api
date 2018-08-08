@@ -10,4 +10,5 @@ node(:price) { |p| p.price }
 node(:cost_price) { |p| p.master.cost_price.to_s }
 node(:avg_rating) {|p| p.avg_rating}
 node(:reviews_count) {|p| p.reviews_count}
-node(:currency) { Money::Currency.table[current_currency.underscore.to_sym][:symbol] }
+node(:currency) { current_currency }
+node(:currency_symbol) { Money::Currency.table[current_currency.underscore.to_sym][:symbol] }
