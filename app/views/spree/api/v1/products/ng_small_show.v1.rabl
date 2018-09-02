@@ -1,14 +1,17 @@
 # frozen_string_literal: true
+
 attributes(:slug, :name)
 
 node(:product_url) do |p|
   image = p.master.images.first
-  image && main_app.url_for(image.url(:product))
+  image && main_app.url_for(image.attachment.variant(resize: '240x240', strip: true))
 end
 
-node(:price) { |p| p.price }
+node(:price, &:price)
 node(:cost_price) { |p| p.master.cost_price.to_s }
-node(:avg_rating) {|p| p.avg_rating}
-node(:reviews_count) {|p| p.reviews_count}
+node(:avg_rating, &:avg_rating)
+node(:reviews_count, &:reviews_count)
 node(:currency) { current_currency }
-node(:currency_symbol) { Money::Currency.table[current_currency.underscore.to_sym][:symbol] }
+node(:currency_symbol) {
+  Money::Currency.table[current_currency.underscore.to_sym][:symbol]
+}
