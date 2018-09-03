@@ -6,7 +6,7 @@ node(:product_url) do |p|
   image = p.master.images.first
   image &&
     main_app.url_for(
-      image.attachment.variant(resize: '200x200', strip: true).processed
+      image.attachment.variant(resize: '200x200', strip: true)
     )
 end
 
