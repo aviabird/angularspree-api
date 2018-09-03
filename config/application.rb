@@ -18,6 +18,8 @@ module AngularspreeApi
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    ActiveStorage::Service.url_expires_in = 24.hours
+
     config.to_prepare do
       # Load application's model / class decorators
       Dir.glob(File.join(File.dirname(__FILE__), '../app/**/*_decorator*.rb')) do |c|
