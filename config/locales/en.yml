@@ -2,7 +2,7 @@
 en:
   spree:
     footer_right: "Website <br/> Phone"
-    footer_right2: "#{<%= ENV['FRONT_END_URL'] %>} <br/> #{ENV['CONTACT_NO']}"
+    footer_right2: "<%= ENV['FRONT_END_URL'] %> <br/> <%= ENV['CONTACT_NO'] %>"
     size: "Size"
     price: "Price"
     order_date: "Order date"
