@@ -16,6 +16,6 @@ test:
 
 production:
   adapter: postgresql
-  pool: 5
+  pool: 10
   timeout: 5000
-  database: angularspree_prod
+  database: <%= ENV.fetch("DATABASE_URL") { 20 } %>
